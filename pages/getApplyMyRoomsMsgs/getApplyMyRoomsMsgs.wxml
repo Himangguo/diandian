@@ -1,0 +1,82 @@
+<view class="contain">
+    <view class="swiper-tab">
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待审批</view>
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已审批</view>
+    </view>
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+        <swiper-item>
+        <!-- 待审批 -->
+            <view class="checkContain">
+                <view class="navigationBar">
+                    <view>备注/申请时间</view>
+                    <view>课程名/课程号</view>
+                </view>
+                <view class="checkBox" wx:for="{{noApplyList}}" wx:key="{{item.id}}">
+                    <view class="item head">
+                        <image src="{{noApplyiImageUrl}}" mode="aspectFit" class="headImage"></image>
+                    </view>
+                    <view class="item">
+                        <view class="reamrkname">
+                            {{item.roomapply.remarks}}
+                        </view>
+                        <view class="sendTime">
+                            {{item.sendtime}}
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="roomName">
+                            {{item.roomapply.rname}}
+                        </view>
+                        <view class="roomnumber">
+                            {{item.roomapply.roomnumber}}
+                        </view>
+                    </view>
+                    <view class="item">
+                        <view class="confirmApply" bindtap="agree">同意</view>
+                        <view class="confirmApply" bindtap="disagree">拒绝</view>
+                    </view>
+
+                </view>
+            </view>
+        </swiper-item>
+        <swiper-item>
+            <!-- 已审批 -->
+            <view class="checkContain">
+                <view class="checkBox" wx:for="{{applyedList}}" wx:key="{{item.id}}">
+                    <view class="item head">
+                        <image src="{{applyedImageUrl}}" mode="aspectFit" class="headImage"></image>
+                    </view>
+                    <view class="item">
+                        <view class="reamrkname">
+                            {{item.roomapply.remarks}}
+                        </view>
+                        <view class="sendTime">
+                            {{item.sendtime}}
+                        </view>
+                    </view>
+                 <view class="item">
+                     <view class="roomName">
+                         {{item.roomapply.rname}}
+                     </view>
+                     <view class="roomnumber">
+                         {{item.roomapply.roomnumber}}
+                     </view>
+                 </view>
+                    <view class="item">
+                        <view wx:if="{{item.roomapply.dealresult === 1}}" class="dealresult">
+                            已通过
+                        </view>
+                        <view wx:if="{{item.roomapply.dealresult === 2}}" class="dealresult">
+                            已拒绝
+                        </view>
+                        <view class="dealTime">
+                            {{item.roomapply.dealtime}}
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+        </swiper-item>
+
+    </swiper>
+</view>

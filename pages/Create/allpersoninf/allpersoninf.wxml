@@ -1,0 +1,21 @@
+<view class='contain'>
+  <view class="table">
+    <view class='tr'>
+      <view class='th'>序号</view>
+      <view class='th'>ID</view>
+      <view class='th'>昵称</view>
+      <view class='th'>到达</view>
+    </view>
+    <block wx:for="{{personinf}}" wx:key="{{item.id}}">
+      <view class="tr">
+        <view class='td'>{{index+1}}</view>
+        <view class='td'>{{item.userid}}</view>
+        <view class='td'>{{item.lists.remarkname}}</view>
+        <view class='td'>{{item.attendtime?item.attendtime:'未签到'}}</view>
+      </view>
+    </block>
+  </view>
+
+</view>
+
+

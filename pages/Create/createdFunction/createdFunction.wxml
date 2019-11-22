@@ -1,0 +1,38 @@
+<!--pages/roomFunction/roomFunction.wxml-->
+<view class='top'>
+  <image src="/images/homepage3.jpg" ></image>
+</view>
+<view class="weui-cells__title">功能列表</view>
+<view class="weui-cells">
+
+  <navigator class="weui-cell weui-cell_access" url="{{goUrl}}">
+    <view class="weui-cell__hd">
+      <image src="/images/icon1.png" alt="xx" style="width:20px;height:20px;margin-right:5px;display:block"></image>
+    </view>
+    <view class="weui-cell__bd">
+      <text>课程考勤记录</text>
+    </view>
+    <view class="weui-cell__ft"></view>
+  </navigator>
+
+  <navigator class="weui-cell weui-cell_access" url="{{lookallperson}}">
+    <view class="weui-cell__hd">
+      <image src="/images/icon3.png" alt="xx" style="width:20px;height:20px;margin-right:5px;display:block"></image>
+    </view>
+    <view class="weui-cell__bd">
+      <text>课程用户一览</text>
+    </view>
+    <view class="weui-cell__ft"></view>
+  </navigator>
+  <navigator class="weui-cell weui-cell_access" url="{{getStudentStatistics}}">
+    <view class="weui-cell__hd">
+      <image src="/images/icon3.png" alt="xx" style="width:20px;height:20px;margin-right:5px;display:block"></image>
+    </view>
+    <view class="weui-cell__bd">
+      <text>单用户考勤汇总表</text>
+    </view>
+    <view class="weui-cell__ft"></view>
+  </navigator>
+
+  <button class='button' bindtap='alterRoom'>修改课程信息</button>
+</view>

@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 1120314 */
+  src: url('//at.alicdn.com/t/font_1120314_w9seae816m.eot');
+  src: url('//at.alicdn.com/t/font_1120314_w9seae816m.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1120314_w9seae816m.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1120314_w9seae816m.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1120314_w9seae816m.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1120314_w9seae816m.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 20px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconmub::before {
+  content: "\e609";
+  padding: 20rpx;
+  color: red;
+}
+
+.icongong::before {
+  content: "\e60b";
+  color: red;
+  font-size: 30px;
+}
+
+.icondel::before {
+  content: "\e612";
+  color: red;
+  font-size: 30px;
+}
+
+.iconman::before {
+  content: "\e606";
+  color: rgb(117, 185, 235);
+  font-size: 30px;
+}
+
+.iconwoman::before {
+  content: "\e605";
+  color: rgb(255, 26, 201);
+  font-size: 30px;
+}
+
+.iconback::before {
+  content: "\e653";
+  color: rgb(70, 124, 253);
+  font-size: 30px;
+}
+
+.iconend::before {
+  content: "\e607";
+  color: red;
+  font-size: 35px;
+}
+.iconending::before{
+   content: "\e607";
+  color: red;
+  font-size: 25px;
+}
+
+.iconred::before {
+  content: "\e600";
+  color: red;
+  font-size: 25px;
+}
+
+.icongreen::before {
+  content: "\e600";
+  color: rgb(17, 245, 17);
+  font-size: 25px;
+}
+
+.iconperson::before {
+  content: "\e608";
+  color: skyblue;
+  font-size: 25px;
+}

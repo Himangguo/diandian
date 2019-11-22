@@ -1,0 +1,15 @@
+<view class='contain'>
+  <view class='freshUser'>
+      <view class='itemView'>
+        <view>状态</view>
+       <view wx:if="{{ownuser.status==='成功'}}" class='iconfont icongreen'></view>
+        <view wx:else class='iconfont iconred'></view>
+      </view>
+  </view>
+  <view class='footView'>
+    <view class='backing iconfont iconback' catchtap='backing'></view>
+    <view class='attending'>
+      {{attendence}}
+    </view>
+  </view>
+</view>

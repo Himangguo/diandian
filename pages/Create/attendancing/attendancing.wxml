@@ -1,0 +1,29 @@
+<view class='contain'>
+  <view class="header">
+      <view class="back" bindtap="backing">返回</view>
+  <view class="signed" bindtap="chooseSigned" style="background:{{buttonColor}};color:{{fontColor}}">已签  {{signed}}/{{listNum}}</view>
+  <view class="nullSign" bindtap="chooseNullSign" style="background:{{buttonColor_1}};color:{{fontColor_1}}">未签  {{nullSign}}/{{listNum}}</view>
+      <view class="over" bindtap="overing">结束</view>
+  </view>
+   <scroll-view scroll-y="true" class="scroll-view_H">
+   <view class="studentList">
+      <view class="stuInfBox" wx:for="{{signedOrnullSignStu}}" wx:key="{{item.id}}">
+      <view class="stuinfLeft">
+       <view class="stuName">{{item.lists.remarkname}}</view>
+          <view class="stuSignTime">{{item.signTime}}</view>
+      </view>
+      <view class="stuinfRight">
+          <view class="stuStatus">{{item.status}}</view>
+          <view class="changeStatus" wx:if="{{changeButtonview}}" bindtap="changeStatus">修改状态</view>
+          <view class="fourChangeButton" wx:else >
+              <view class="itemChange" bindtap="forArrive" data-stuid="{{item.id}}">到达</view>
+              <view class="itemChange" bindtap="forLate" data-stuid="{{item.id}}">迟到</view>
+              <view class="itemChange" bindtap="forLeave" data-stuid="{{item.id}}">请假</view>
+              <view class="itemChange" bindtap="forAbsent" data-stuid="{{item.id}}">旷课</view>
+          </view>
+          </view>
+      </view>
+   </view>
+
+   </scroll-view>
+</view>

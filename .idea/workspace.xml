@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2d7998b0-9691-4fc6-8312-55d12b6f320a" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1SmjbKZHbUoqkd6VuF0ZofTg21y" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/前端代码/node/测试json" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2d7998b0-9691-4fc6-8312-55d12b6f320a" name="Default Changelist" comment="" />
+      <created>1572175734168</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572175734168</updated>
+      <workItem from="1572175736525" duration="110000" />
+      <workItem from="1572175879633" duration="9780000" />
+      <workItem from="1572187803318" duration="1535000" />
+      <workItem from="1572245557200" duration="3299000" />
+      <workItem from="1572260451555" duration="2730000" />
+      <workItem from="1572334197775" duration="19134000" />
+      <workItem from="1572779661005" duration="2682000" />
+      <workItem from="1573037338115" duration="86000" />
+      <workItem from="1573037477781" duration="9244000" />
+      <workItem from="1573193381177" duration="6078000" />
+      <workItem from="1573354491079" duration="2688000" />
+      <workItem from="1573372054436" duration="148000" />
+      <workItem from="1573546072866" duration="2238000" />
+      <workItem from="1573994302234" duration="2553000" />
+      <workItem from="1574000561838" duration="1452000" />
+      <workItem from="1574067468895" duration="3914000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/pages/joinedroom/joinedroom.js</url>
+          <line>101</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

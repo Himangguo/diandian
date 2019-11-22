@@ -1,0 +1,18 @@
+<!--pages/joinedFunction/joinedFunction.wxml-->
+<view class='top'>
+  <image src="/images/homepage3.jpg"></image>
+</view>
+<view class="weui-cells__title">功能列表</view>
+<view class="weui-cells">
+
+  <navigator class="weui-cell weui-cell_access" url="{{goUrl}}">
+    <view class="weui-cell__hd">
+      <image src="/images/icon1.png" alt="xx" style="width:20px;height:20px;margin-right:5px;display:block"></image>
+    </view>
+    <view class="weui-cell__bd">
+      <text>查看我的考勤记录</text>
+    </view>
+    <view class="weui-cell__ft"></view>
+  </navigator>
+  <button class='button'>分享房间</button>
+</view>

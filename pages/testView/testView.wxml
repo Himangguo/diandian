@@ -1,0 +1,26 @@
+<view class='contain'>
+  <view class='freshUser'>
+    <block wx:for="{{freshJoinedUser}}" wx:key="{{item.id}}">
+      <view class='itemView'>
+        <view>{{item.remarkname}}</view>
+        <view wx:if="{{item.sex===1}}" class='iconfont iconman'></view>
+        <view wx:else class='iconfont iconwoman'></view>
+      </view>
+    </block>
+  </view>
+  <view class='footView'>
+    <view class='backing iconfont iconback'></view>
+    <view class='attending'>
+      持续考勤中
+    </view>
+    <view class='ending iconfont iconend'></view>
+  </view>
+</view>
+<view class='changenickname' hidden='{{hiddens}}'>
+  <form bindsubmit="formSubmit">
+    <input class='input1' type='text' placeholder='起个霸气的昵称吧' name="nickname" focus="{{focus}}" value="{{value}}" />
+    <button form-type="submit" class='button_q'>确定</button>
+    <button catchtap='cancel' class='button_q'>取消</button>
+
+  </form>
+</view>

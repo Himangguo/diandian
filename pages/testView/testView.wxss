@@ -1,0 +1,132 @@
+.freshUser {
+  margin: 50rpx auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.itemView {
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid rgb(159, 161, 163);
+  width: auto;
+  margin: 10px 10px;
+  background: linear-gradient(#96fbc4, #f9f586);
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgb(159, 161, 163);
+  animation: myfirst 5s;
+}
+
+@keyframes myfirst {
+  0% {
+    background: red;
+    height: 50px;
+  }
+
+  25% {
+    background: yellow;
+    height: 20px;
+  }
+
+  50% {
+    background: blue;
+    height: 50px;
+  }
+
+  75% {
+    background: green;
+    height: 20px;
+  }
+
+  100% {
+    background: red;
+    height: 50px;
+  }
+}
+
+@keyframes second {
+  0% {
+    font-size: 20px;
+    font-weight: 100;
+    letter-spacing: 2px;
+  }
+
+  50% {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
+  }
+
+  100% {
+    font-size: 20px;
+    font-weight: 100;
+    letter-spacing: 2px;
+  }
+}
+
+.footView {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  bottom: 1px;
+  border: 1px solid black;
+  width: 100vw;
+  height: 50px;
+}
+
+.backing {
+  border: 1px solid black;
+  height: 50px;
+  width: 20vw;
+  text-align: center;
+  line-height: 50px;
+}
+
+.backing:hover {
+  background: rgb(237, 236, 232);
+}
+
+.ending:hover {
+  background: rgb(237, 236, 232);
+}
+
+.attending {
+  height: 50px;
+  border: 1px solid black;
+  width: 60vw;
+  text-align: center;
+  line-height: 50px;
+  animation: second 4s infinite;
+}
+
+.ending {
+  border: 1px solid black;
+  height: 50px;
+  width: 20vw;
+  text-align: center;
+  line-height: 50px;
+}
+
+.changenickname {
+position: fixed;
+top: 100px;
+left: 25vw;
+width: 40vw;
+height: 20vh;
+padding: 20px;
+border: 1px solid black;
+background: white;
+opacity:0.8;
+}
+.button_q{
+margin: 5px;
+ background-color: #f36838;
+}
+.input1{
+  border: 1px solid black;
+  border-radius: 5px;
+}

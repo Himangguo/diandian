@@ -1,0 +1,5 @@
+.tip{
+  padding: 50rpx;
+  color: red;
+  font-size: 30rpx;
+}

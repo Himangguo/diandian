@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="userinfo">
+    <block class="touxiang">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+    <view class="weui-cells__title">个人信息</view>
+    <view class="weui-cells">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <text>性别</text>
+        </view> 
+        <view wx:if="{{userInfo.gender===1}}" class="weui-cell__ft">男</view>
+         <view wx:if="{{userInfo.gender===0}}" class="weui-cell__ft">女</view>
+    </view>
+</view>
+<view class="weui-cells">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <text>城市</text>
+        </view>
+        <view class="weui-cell__ft">{{userInfo.city}}</view>
+    </view>
+</view>
+<view class="weui-cells">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <text>国籍</text>
+        </view>
+        <view class="weui-cell__ft">{{userInfo.country}}</view>
+    </view>
+    </view>
+
+
+<view class="weui-cells__title">点点考勤</view>
+<view class="weui-cells">
+
+    <navigator class="weui-cell weui-cell_access" url="/pages/aboutme/aboutme">
+        <view class="weui-cell__hd"><image src="/images/about.png" alt="" style="width:20px;height:25px;margin-right:5px;display:block"></image></view>
+        <view class="weui-cell__bd">
+            <text>关于</text>
+        </view>
+        <view class="weui-cell__ft"></view>
+    </navigator>
+</view>
+  <button class='button'>使用帮助</button>
+  <button class='button'>意见反馈</button>
+  </view>

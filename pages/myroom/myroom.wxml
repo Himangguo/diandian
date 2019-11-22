@@ -1,0 +1,23 @@
+<!--pages/myroom/myroom.wxml-->
+<view class='contain'>
+
+<view class='fontmyroom'>
+<text >我的课程列表:</text>
+<button  class='buttonstyle' catchtap="createattence">创建</button>
+</view>
+<block wx:if="{{haveData}}">
+<block wx:for="{{roomlist}}" wx:key="{{item.id}}" >
+ <view class='room'catchtap="gocreatedroom" data-index="{{index}}">
+<view class='iconfont iconmub:before'><text class='title'>{{item.rname}}</text></view>
+<view  class='textarea'><text  class='textfont'>{{item.note}}</text></view>
+</view>
+</block>
+</block>
+<view wx:else class="ifnothavedata">
+    您还没创建过课程哦!
+</view>
+<view wx:if="{{!haveUserInfo && canIUse}}" class="ifhaveUserInfo">
+  <view class="takeCare">使用</view>
+   <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo" >授权并使用小程序</button>
+</view>
+</view>

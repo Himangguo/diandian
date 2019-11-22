@@ -1,0 +1,19 @@
+<!--pages/roominf/roominf.wxml-->
+<view class='contain'>
+
+<view class='roomabout'>
+<button  class='iconfont icongong::before' catchtap='roomfunc'></button>
+<button  class='iconfont icondel::before' catchtap='deleteRoom'></button>
+<view class='roomdetail'>
+<view>课程号: <text class='textfont'>{{roominf.id}}</text></view>
+<view>课程名: <text class='textfont'>{{roominf.rname}}</text></view>
+<view>创建者id: <text class='textfont'>{{roominf.userid}}</text></view>
+<view>课程人数: <text class='textfont'>{{roominf.personcount}}</text></view>
+<view>考勤距离: <text class='textfont'>{{roominf.distance}}</text></view>
+<view>简介: <text class='textfont'>{{roominf.note}}</text></view>
+</view>
+<view class='attence' catchtap='startattendance'>
+开始考勤
+</view>
+</view>
+</view>

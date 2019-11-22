@@ -1,0 +1,26 @@
+.formcenter {
+  border: 1px solid black;
+  margin: 100rpx auto;
+  width: 80vw;
+}
+.inputtype{
+  padding: 10rpx;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  
+}
+.infont{
+  margin-left: 30rpx;
+    color: gray;
+  font-size: 28rpx;
+}
+
+.button1 {
+  width: 70vw;
+  color: white;
+  background-color: #f36838;
+  margin: 40rpx auto;
+  border: 10rpx;
+}
+

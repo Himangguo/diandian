@@ -1,0 +1,71 @@
+/* pages/joinedroom/joinedroom.wxss */
+.joinedfont{
+    margin-left: 27rpx;
+}
+.scrollstyle{
+  width: 100vw;
+  height: 50%;
+}
+.roomgo {
+  position: relative;
+  padding: 15rpx;
+  margin: 40rpx auto;
+  width: 80vw;
+  height: auto;
+  background-color: white;
+  border-color: rgb(159, 161, 163);
+  border-style: dotted;
+  border-radius: 15rpx;
+  border-width: 1rpx;
+  color: black;
+  letter-spacing: 5rpx;
+}
+.signin{
+  color: white;
+  text-align: center;
+  height: 100%;
+  width: 100rpx;
+  background:#f36838;
+  position: absolute;
+  top: 0;
+  right:0;
+  border-top-right-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+  border-left: 1px  rgb(159, 161, 163) dotted;
+}
+.number{
+   display: inline;
+  margin: 0 20rpx;
+  font-size: 50rpx;
+}
+.roomname{
+  display: inline;
+   font-size: 40rpx;
+}
+.roomnote{
+  height: auto;
+  margin: 15rpx;
+  color: gray;
+  font-size: 28rpx;
+}
+.bar{
+  position:fixed;
+  top: 0;
+  width: 100vw;
+}
+.changenickname {
+position: fixed;
+top: 100px;
+left: 25vw;
+width: 40vw;
+height: 20vh;
+padding: 20px;
+border: 1px solid black;
+background: white;
+opacity:0.8;
+}
+
+.input1{
+  border: 1px solid black;
+  border-radius: 5px;
+}

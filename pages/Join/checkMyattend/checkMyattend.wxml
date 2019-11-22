@@ -1,0 +1,22 @@
+<view class='contain'>
+  <view class="table">
+    <view class='tr'>
+      <view class='th'>序号</view>
+      <view class='th'>开始</view>
+      <view class='th'>结束</view>
+      <view class='th'>到达</view>
+    </view>
+    <block wx:if="{{haveData}}" wx:for="{{userdetails}}" wx:key="{{item.id}}">
+      <view class="tr">
+        <view class='td'>{{index+1}}</view>
+        <view class='td'>{{item.roomdetail.begintime}}</view>
+        <view class='td'>{{item.roomdetail.endtime}}</view>
+        <view class='td'>{{item.attendtime?item.attendtime:'未签到'}}</view>
+      </view>
+    </block>
+
+  </view>
+  <view wx:if="{{!haveData}}" class="ifnothavedata">
+    您还没有记录哦!
+  </view>
+</view>

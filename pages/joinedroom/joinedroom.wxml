@@ -1,0 +1,62 @@
+<view class='contain'>
+  <view class="page bar">
+    <view class="page__bd">
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="number" class="weui-search-bar__input" placeholder="课程ID" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+            </view>
+          </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索</view>
+          </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+      </view>
+      <view  catchtap='changeName' class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+        <view  class="weui-cell" hover-class="weui-cell_active">
+        <view class='search_room'>
+        <view class='number'>{{roominf.id}}</view>
+         <view class='roomname'>{{roominf.rname}}</view>
+          <view class='roomnote'>{{roominf.note}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!---------------------------------------------------------------------------------------------->
+  <view class='top'>
+    <image src="/images/meet2.jpg"></image>
+  </view>
+  <view class="weui-cells__title joinedfont">我加入过的房间：</view>
+  <scroll-view wx:if="{{haveData}}" scroll-y class='scrollstyle'>
+    <block wx:for="{{joinroom}}" wx:key="{{item.id}}">
+      <view class='roomgo' catchtap="joinroominf" data-index="{{index}}">
+        <view class='iconfont iconmub:before'>
+          <text class='title'>{{item.rname}}</text>
+        </view>
+        <view class='textarea'>
+          <text class='textfont'>{{item.note}}</text>
+        </view>
+        <view class='signin' style='line-height:{{lineHeight}}' catchtap='tosign' data-createdid="{{item.userid}}" data-roomid="{{item.id}}">
+        签到
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view wx:else class="ifnothavedata">
+    您还没加入过房间哦!
+  </view>
+</view>
+<view class='changenickname' hidden='{{hiddens}}'>
+  <form bindsubmit="formSubmit">
+    <input class='input1' type='text' placeholder='起个霸气的昵称吧' name="nickname" focus="{{focus}}" value="{{value}}" />
+    <button form-type="submit" class='button_q'>确定</button>
+    <button catchtap='cancel' class='button_q'>取消</button>
+
+  </form>
+</view>

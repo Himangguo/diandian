@@ -1,0 +1,44 @@
+<!--pages/createattence/createattence.wxml-->
+<view class='top'>
+  <image src="/images/homepage3.jpg" ></image>
+</view>
+<form bindsubmit="formSubmit" bindreset="formReset">
+ <view class="weui-cells__title">自定义信息</view>
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">房间名称:</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请填写课程名" name="rname" />
+      </view>
+    </view>
+     <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">考勤距离:</label>
+      </view>
+      <view class="weui-cell__bd">
+      <text class='select'> {{distance===''?"单位是米哦":distance}}</text>
+       <picker name="distance" mode="selector" range="{{range}}" bindchange="selectDis" bindcancel="selectnull"><view class='selectstyle'>选择</view></picker>
+      </view>
+    </view>
+      <view class="weui-cell">
+          <view class="weui-cell__hd">
+              <label class="weui-label">加入审核:</label>
+          </view>
+          <view class="weui-cell__bd">
+              <switch checked="{{switch1Checked}}" bindchange="switch1Change"/>
+          </view>
+      </view>
+    </view>
+ <view class="section">
+ 房间简介:
+  <textarea   placeholder="说点什么把" name="note"/>
+</view>
+<button  form-type="reset" class='button'>清空</button>
+<button  form-type="submit" class='button'>创建</button>
+</form>
+    
+ 
+
+

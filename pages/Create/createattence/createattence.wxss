@@ -1,0 +1,22 @@
+.section {
+  font-size: 35rpx;
+  margin-left: 30rpx;
+}
+.selectstyle {
+  text-align: center;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  padding: 0 30rpx;
+  height: 80%;
+  color: white;
+  border: 1px solid;
+  position: absolute;
+  right: 25rpx;
+  top: 10rpx;
+  background-color: #f36838;
+}
+
+
+.select {
+  color: #999;
+}

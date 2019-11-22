@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/myroom/myroom",
+    "pages/logs/logs",
+    "pages/joinedroom/joinedroom",
+    "pages/getApplyMyRoomsMsgs/getApplyMyRoomsMsgs",
+    "pages/Create/createattence/createattence",
+    "pages/Create/createdFunction/createdFunction",
+    "pages/Join/gojoinedroom/gojoinedroom",
+    "pages/Join/joinedFunction/joinedFunction",
+    "pages/Join/checkMyattend/checkMyattend",
+    "pages/Create/allpersoninf/allpersoninf",
+    "pages/Create/gocreatedroom/gocreatedroom",
+    "pages/Create/attendancing/attendancing",
+    "pages/Create/checkRoomattend/checkRoomattend",
+    "pages/Create/getRoomAllUser/getRoomAllUser",
+    "pages/testView/testView",
+    "pages/Join/joincheck/joincheck",
+    "pages/Create/alterRoominf/alterRoominf",
+    "pages/Create/getStudentStatistics/getStudentStatistics"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#6bcb4a",
+    "navigationBarTitleText": "点点考勤",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "selectedColor": "#6bcb4a",
+    "list": [
+      {
+        "pagePath": "pages/myroom/myroom",
+        "text": "创建课程",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home1.png"
+      },
+      {
+        "pagePath": "pages/getApplyMyRoomsMsgs/getApplyMyRoomsMsgs",
+        "text": "申请列表",
+        "iconPath": "images/apply.png",
+        "selectedIconPath": "images/apply1.png"
+      },
+      {
+        "pagePath": "pages/joinedroom/joinedroom",
+        "text": "加入课程",
+        "iconPath": "images/icon2.png",
+        "selectedIconPath": "images/icon21.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "个人中心",
+        "iconPath": "images/usercenter.png",
+        "selectedIconPath": "images/usercenter1.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredBackgroundModes": [
+    "location"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

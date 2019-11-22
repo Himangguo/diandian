@@ -1,0 +1,79 @@
+.header{
+  height: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+}
+.signed,.nullSign{
+  width: 100px;
+  height: 25px;
+  border: 1px solid;
+}
+.studentList{
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid
+}
+.stuInfBox{
+  display: flex;
+  width: 95%;
+  height: 100px;
+  margin: 2px auto;
+  border: 1px solid;
+}
+.stuinfLeft,.stuinfRight{
+  position: relative;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid;
+}
+.stuName,.stuStatus,.stuSignTime{
+  width: 100%;
+  line-height: 50px;
+}
+.changeStatus,.fourChangeButton{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  border-left: 1px solid;
+  font-size: 15px;
+}
+.itemChange{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 21%;
+}
+.itemChange {
+  border: 1px solid;
+}
+.back,.over{
+width: 60px;
+background: green;
+text-align: center;
+color: white;
+height: 25px;
+}
+.back{
+  position: absolute;
+  left: 0;
+}
+.over{
+  position: absolute;
+  right: 0;
+}
