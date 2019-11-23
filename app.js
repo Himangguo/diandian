@@ -1,4 +1,20 @@
 App({
+    /**
+     *接收申请信息
+     */
+  receiveApply:function(){
+      let that = this;
+        // 监听申请信息
+        wx.request({
+            method:'get',
+            url:that.globalData.urlCreated('/message/receiveMessage',that.globalData.userid),
+            success(res) {
+                console.log("接收到一个申请");
+
+                that.receiveApply();
+            }
+        })
+      } ,
   loginCon: function(res) {
     var that = this;
     // 发起网络请求
@@ -6,17 +22,13 @@ App({
       wx.request({
         url: that.globalData.urlCreated("/index/login", that.globalData.userInfo.nickName, res.code),
         method: 'get',
-        /*header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },*/
         success: function(res) {
           console.log('登录->后端返回的数据' + JSON.stringify(res.data));
           if (res.data.code === 1) {
             console.log("登录成功");
-            //将userid保存在全局app中
+            // 将userid保存在全局app中
             that.globalData.userid = res.data.data;
-           // that.sendUserinf(that); //更新用户信息
-          }else if(res.data.code===-1){
+          }else if(res.data.code === -1){
             console.log("登录失败，失败信息："+res.data.message);
           }
         },
@@ -40,10 +52,11 @@ App({
         var time2 = setInterval(function() {
           if (that.globalData.userInfo) { //如果已经获得了userInfo
             console.log(that.globalData.userInfo);
+            that.globalData.ifNowAuth = true;
             that.loginCon(res); //将登录信息发送到后台获取openid
             clearInterval(time2); //清除定时器
           }
-        }, 1000)
+        }, 0)
       }
 
     })
@@ -105,25 +118,67 @@ App({
       return url;
     },
     // 处理时间戳为日期
-    timeFormat(timestamp) {
-      var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      var Y = date.getFullYear() + "-";
-      var M =
-        (date.getMonth() + 1 < 10
-          ? "0" + (date.getMonth() + 1)
-          : date.getMonth() + 1) + "-";
-      var D = date.getDate() + " ";
-      var h = date.getHours() + ":";
-      var m = date.getMinutes() + ":";
-      var s = date.getSeconds();
+    timeFormat:{
+      /**
+       * @params timestamp-时间戳
+       * @returns {string} 11:24
+       */
+      getMS(timestamp){
+        let date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let h = date.getHours() + ":";
+        let m = date.getMinutes();
+        console.log(timestamp, h + m );
+        return  h + m ;
+      },
+      /**
+       * @params timestamp-时间戳
+       * @returns {string} 今天，昨天，更早之前
+       */
+      getYMD(timestamp){
+        let date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let nowdate = new Date()
+        let Y = date.getFullYear();
+        let M = date.getMonth() + 1;
+        let D = date.getDate();
+        let nY = nowdate.getFullYear();
+        let nM = nowdate.getMonth() + 1;
+        let nD = nowdate.getDate();
+        // 如果是今天
+        if ( nY === Y && nM === M && nD === D){
+            return "今天";
+        }
+        // 如果是昨天
+        else if ( nY === Y && nM === M && nD === ( D + 1 ) ){
+            return "昨天";
+        }
+        // 更久之前
+        else{
+          return "更早之前"
+        }
 
-      console.log(timestamp,Y + M + D + h + m + s);
-      return Y + M + D + h + m + s;
+      },
+        /**
+         * @params timestamp-时间戳
+         * @returns {string} 2019-11-10
+         */
+        getTime(timestamp){
+            var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var Y = date.getFullYear() + "-";
+            var M =
+                (date.getMonth() + 1 < 10
+                    ? "0" + (date.getMonth() + 1)
+                    : date.getMonth() + 1) + "-";
+            var D = date.getDate() + " ";
+
+            console.log(timestamp,Y + M + D);
+            return Y + M + D ;
+        },
+
     },
     userInfo: null,
     openid: null,
     userid: null,
-    userdetails: [],
+    ifNowAuth:false,
     url: '192.168.43.232:8080/diandian'
   }
 })

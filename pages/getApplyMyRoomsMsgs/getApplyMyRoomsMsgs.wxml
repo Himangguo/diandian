@@ -1,3 +1,4 @@
+
 <view class="contain">
     <view class="swiper-tab">
         <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待审批</view>
@@ -8,8 +9,8 @@
         <!-- 待审批 -->
             <view class="checkContain">
                 <view class="navigationBar">
-                    <view>备注/申请时间</view>
-                    <view>课程名/课程号</view>
+                    <view class="navItem">备注/申请时间</view>
+                    <view class="navItem">课程名/课程号</view>
                 </view>
                 <view class="checkBox" wx:for="{{noApplyList}}" wx:key="{{item.id}}">
                     <view class="item head">
@@ -32,8 +33,8 @@
                         </view>
                     </view>
                     <view class="item">
-                        <view class="confirmApply" bindtap="agree">同意</view>
-                        <view class="confirmApply" bindtap="disagree">拒绝</view>
+                        <view class="confirmApply" bindtap="agree" data-applyid = "{{item.roomapply.id}}">同意</view>
+                        <view class="confirmApply" bindtap="disagree" data-applyid = "{{item.roomapply.id}}">拒绝</view>
                     </view>
 
                 </view>
@@ -54,14 +55,14 @@
                             {{item.sendtime}}
                         </view>
                     </view>
-                 <view class="item">
-                     <view class="roomName">
-                         {{item.roomapply.rname}}
-                     </view>
-                     <view class="roomnumber">
-                         {{item.roomapply.roomnumber}}
-                     </view>
-                 </view>
+                    <view class="item">
+                        <view class="roomName">
+                            {{item.roomapply.rname}}
+                        </view>
+                        <view class="roomnumber">
+                            {{item.roomapply.roomnumber}}
+                        </view>
+                    </view>
                     <view class="item">
                         <view wx:if="{{item.roomapply.dealresult === 1}}" class="dealresult">
                             已通过

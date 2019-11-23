@@ -44,6 +44,7 @@
         <view class="weui-cell__ft"></view>
     </navigator>
 </view>
+    <button bindtap="tapToAuthorize" wx:if="{{!ifAuth}}">位置授权</button>
   <button class='button'>使用帮助</button>
   <button class='button'>意见反馈</button>
   </view>

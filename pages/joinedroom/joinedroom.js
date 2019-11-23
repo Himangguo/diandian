@@ -12,7 +12,7 @@ Page({
     inputVal: "",
     roominf: null,
     hiddens: true,
-    value: '',
+    value: null,
     focus: true,
 
   },
@@ -40,6 +40,9 @@ Page({
       hiddens: true
     })
   },
+  /**
+   * 加入课程
+   */
   joining: function() {
     var that = this;
     wx.showLoading({
@@ -61,10 +64,6 @@ Page({
         if (res.data.code === 1) {
           wx.showToast({
             title: '加入成功',
-            duration:2000,
-            complete(){
-              wx.hideLoading()
-            }
           })
           //刷新页面
           wx.startPullDownRefresh();
@@ -72,10 +71,6 @@ Page({
           wx.showToast({
             title: '不能加入你房间',
             image: '/images/warning.png',
-            duration: 2000,
-            complete() {
-              wx.hideLoading()
-            }
           })
         }
       },
@@ -108,63 +103,105 @@ Page({
     var roomid = event.currentTarget.dataset.roomid;
     var latitude = null;
     var longitude = null;
-    wx.getLocation({
-      type: 'gcj02',
-      isHighAccuracy:"true",
+    wx.getSetting({
       success(res) {
-        console.log('获取位置成功');
-        latitude = res.latitude
-        longitude = res.longitude
-        wx.showLoading({
-          title: '签到中',
-        })
-        wx.request({
-          method:'POST',
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          url: app.globalData.urlCreated('/attendance/single/student'),
-          data: {
-            roomId: roomid,
-            studentId: app.globalData.userid,
-            latitude: latitude,
-            longitude: longitude
-          },
-
-          success: function(res) {
-              //如果在考勤范围内
-              if (res.data.status === 1) {
-                wx.showToast({
-                  title: '签到成功',
-                  duration: 2000,
-                })
-              } else if (res.data.status === 2) {
-                wx.showToast({
-                  title: '签到过了',
-                  duration: 2000,
-                })
-            } else if (res.data.status === 0) {
-                console.log('签到失败：',res.data)
-              wx.showToast({
-                title: '签到失败',
-                image: '/images/warning.png',
-                duration: 2000
+        //如果还没授权用户位置信息或者拒绝授权
+        console.log(res.authSetting);
+        if (!res.authSetting['scope.userLocation']) {
+          console.log('ssssssssssssss')
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              // 用户已经同意小程序获取位置信息
+              console.log("用户已经同意小程序获取位置信息");
+            },
+            fail: function(){
+              wx.showModal({
+                title: '用户未授权',
+                content: '如需正常使用小程序功能，请按确定并且在【我的】页面中点击授权按钮，点击位置信息勾选。',
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
+                  }
+                }
               })
             }
-          },
-          fail: function() {
-            wx.showToast({
-              title: '服务器异常',
-              image: '/images/warning.png'
-            })
-          }
-        })
-        wx.showLoading({
-          title: '签到中',
-        })
+          })
+          // 如果已经授权
+        } else {
+
+          wx.showLoading({
+            title: '签到中',
+          })
+          wx.getLocation({
+            type: 'gcj02',
+            isHighAccuracy: "true",
+            highAccuracyExpireTime: 4000,
+            success(res) {
+              console.log('获取位置成功');
+              latitude = res.latitude
+              longitude = res.longitude
+              wx.request({
+                method: 'POST',
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                url: app.globalData.urlCreated('/attendance/single/student'),
+                data: {
+                  roomId: roomid,
+                  studentId: app.globalData.userid,
+                  latitude: latitude,
+                  longitude: longitude
+                },
+
+                success: function (res) {
+                  //如果在考勤范围内
+                  if (res.data.status === 1) {
+                    wx.showToast({
+                      title: '签到成功',
+                      duration: 2000,
+                    })
+                  } else if (res.data.status === 2) {
+                    wx.showToast({
+                      title: '签到过了',
+                      duration: 2000,
+                    })
+                  } else if (res.data.status === 0) {
+                    console.log('签到失败：', res.data)
+                    wx.showToast({
+                      title: '签到失败',
+                      image: '/images/warning.png',
+                      duration: 2000
+                    })
+                  }
+                },
+                fail: function () {
+                  wx.showToast({
+                    title: '服务器异常',
+                    image: '/images/warning.png'
+                  })
+                }
+              })
+              wx.showLoading({
+                title: '签到中'
+              })
+            },
+            // 位置获取失败
+            fail(err) {
+              console.log("获取位置失败：", err)
+              wx.showToast({
+                title: "获取位置失败",
+                image: "/images/warning.png"
+              })
+            }
+          })
+
+        }
+
+
       }
     })
-
 
   },
   showInput: function() {
@@ -175,12 +212,14 @@ Page({
   hideInput: function() {
     this.setData({
       inputVal: "",
-      inputShowed: false
+      inputShowed: false,
+      roominf:null
     });
   },
   clearInput: function() {
     this.setData({
-      inputVal: ""
+      inputVal: "",
+      roominf:null
     });
   },
   inputTyping: function(e) {
@@ -207,10 +246,14 @@ Page({
           }
         }
       })
+    }else{
+      this.setData({
+        roominf:null
+      });
     }
+  }
 
-  },
-
+  ,
 
 
 
@@ -278,11 +321,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      value: app.globalData.userInfo.nickName
-    })
-    //
-    this.fetchData();
+    if (!app.globalData.userInfo){
+      this.setData({
+        isload:false
+      })
+      wx.showModal({
+        title: '用户未授权',
+        content: '如需正常使用小程序，请按确定并且在【创建课程】页面中点击授权按钮',
+        showCancel: false,
+        success: function (res) {
+          console.log('用户点击了确定');
+          return;
+        }
+      })
+    }else{
+      this.setData({
+        value: app.globalData.userInfo.nickName
+      })
+      //
+      this.fetchData();
+    }
+
+  },
+  /**
+   * 监听页面显示
+   */
+  onShow(){
+    if (app.globalData.ifNowAuth){
+      this.fetchData();
+    }
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

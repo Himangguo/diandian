@@ -17,18 +17,27 @@
         </view>
         <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
       </view>
-      <view  catchtap='changeName' class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <view  catchtap='changeName' class="weui-cells searchbar-result" hidden="{{roominf==null}}">
         <view  class="weui-cell" hover-class="weui-cell_active">
         <view class='search_room'>
-        <view class='number'>{{roominf.id}}</view>
-         <view class='roomname'>{{roominf.rname}}</view>
-          <view class='roomnote'>{{roominf.note}}</view>
+          <view class="search_item">
+            <view class='number'>{{roominf.roomnumber}}</view>
+            <view class='roomnote'>{{roominf.note}}</view>
+          </view>
+        <view class="search_item">
+          <view class='roomname'>{{roominf.rname}}</view>
+          <view class='personcount'>
+              <image src="/images/classPersonCount.png" mode="aspectFit" class="personImage"></image>
+              {{roominf.personcount}}
+          </view>
+        </view>
+
           </view>
         </view>
       </view>
     </view>
   </view>
-  <!---------------------------------------------------------------------------------------------->
+
   <view class='top'>
     <image src="/images/meet2.jpg"></image>
   </view>

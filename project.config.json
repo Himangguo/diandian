@@ -5,10 +5,11 @@
 	},
 	"setting": {
 		"urlCheck": false,
-		"es6": true,
+		"es6": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,

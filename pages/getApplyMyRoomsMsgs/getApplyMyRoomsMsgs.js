@@ -13,7 +13,8 @@ Page({
     noApplyList:null,
     applyedList:null,
     applyedImageUrl:'/images/headImage.png',
-    noApplyiImageUrl:'/images/applyImage.png'
+    noApplyiImageUrl:'/images/applyImage.png',
+
   },
 
   /**
@@ -37,12 +38,12 @@ Page({
             return item.roomapply.dealresult !== null //当isread == 1时说明已审批
           })
           for(var item of noApplyList){
-            item.sendtime = app.globalData.timeFormat(item.sendtime);
-            item.roomapply.dealtime = app.globalData.timeFormat(item.roomapply.dealtime);
+            item.sendtime = app.globalData.timeFormat.getTime(item.sendtime);
+            item.roomapply.dealtime = app.globalData.timeFormat.getTime(item.roomapply.dealtime);
           }
           for (var item of applyedList) {
-            item.sendtime = app.globalData.timeFormat(item.sendtime);
-            item.roomapply.dealtime = app.globalData.timeFormat(item.roomapply.dealtime);
+            item.sendtime = app.globalData.timeFormat.getTime(item.sendtime);
+            item.roomapply.dealtime = app.globalData.timeFormat.getTime(item.roomapply.dealtime);
           }
           //修改data
           that.setData({
@@ -82,11 +83,7 @@ Page({
         console.log('成功，后台返回数据：',res.data)
         if (res.data.code === 1){
           wx.showToast({
-            title:'审核通过'
-          })
-        }else if (res.data.code === 0){
-          wx.showToast({
-            title:'审核拒绝'
+            title:'操作成功'
           })
         }
       },
@@ -111,7 +108,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getAllApply();
+    if (!app.globalData.userInfo){
+      wx.showModal({
+        title: '用户未授权',
+        content: '如需正常使用小程序，请按确定并且在【创建课程】页面中点击授权按钮',
+        showCancel: false,
+        success: function (res) {
+          console.log('用户点击了确定');
+          return;
+        }
+      })
+    }else{
+      this.getAllApply();
+    }
+
+  },
+  /**
+   * 监听页面显示
+   */
+  onShow(){
+    if (app.globalData.ifNowAuth){
+      this.getAllApply();
+    }
   },
 
 

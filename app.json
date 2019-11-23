@@ -48,7 +48,7 @@
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "个人中心",
+        "text": "我的",
         "iconPath": "images/usercenter.png",
         "selectedIconPath": "images/usercenter1.png"
       }

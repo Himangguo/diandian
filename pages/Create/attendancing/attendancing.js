@@ -75,9 +75,17 @@ Page({
    * 点击返回按钮
    */
   backing: function() {
-    wx.redirectTo({
-      url:'/pages/Create/gocreatedroom/gocreatedroom?roominf=' + JSON.stringify(this.data.roominf)
-    })
+   wx.showModal({
+     title: '提醒',
+     content: '取消本次考勤？',
+     success(res) {
+       if (res.confirm) {
+         wx.reLaunch({
+           url: '/pages/myroom/myroom'
+         })
+       } 
+     }
+   })
 
   },
   /**
@@ -100,8 +108,6 @@ Page({
           }
           //end信息发送到服务端请求结束
           that.sendSocketMessage(data);
-
-
         }
       }
     })
@@ -302,6 +308,10 @@ Page({
           //若没成功
           if (jsonRes.status === 0) {
             console.log('考勤未能成功');
+            wx.showToast({
+              title: '出错拉',
+              images:"/pages/warning.png"
+            })
 
 
             //若成功了

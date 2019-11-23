@@ -31,7 +31,15 @@ Page({
     wx.getSetting({
       success(res) {
         console.log(res.authSetting);
-        //如果还没授权用户位置信息
+       // 如果房间人数为0
+        if (that.data.roominf.personcount == 0){
+          wx.showToast({
+            title: '课程人数为零',
+            image: '/images/warning.png'
+          })
+          return;
+        }
+         //如果还没授权用户位置信息或者拒绝授权
         if (!res.authSetting['scope.userLocation']) {
           wx.authorize({
             scope: 'scope.userLocation',

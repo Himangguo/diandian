@@ -196,53 +196,7 @@ view{
   animation: myfirst 5s;
 }
 
-@keyframes myfirst {
-  0% {
-    background: red;
-    height: 50px;
-  }
 
-  25% {
-    background: yellow;
-    height: 20px;
-  }
-
-  50% {
-    background: blue;
-    height: 50px;
-  }
-
-  75% {
-    background: green;
-    height: 20px;
-  }
-
-  100% {
-    background: red;
-    height: 50px;
-  }
-}
-
-@keyframes second {
-  0% {
-    font-size: 20px;
-    font-weight: 100;
-    letter-spacing: 2px;
-  }
-
-  50% {
-    font-size: 20px;
-    font-weight: 1000;
-    letter-spacing: 2px;
-    color: white;
-  }
-
-  100% {
-    font-size: 20px;
-    font-weight: 100;
-    letter-spacing: 2px;
-  }
-}
 
 .footView {
   display: flex;
