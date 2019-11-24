@@ -1,4 +1,4 @@
-// pages/joinedroom/joinedroom.js
+let temp = require('../../template/wxmlTemp/newApply.js');
 const app = getApp();
 Page({
   /**
@@ -16,6 +16,8 @@ Page({
     focus: true,
 
   },
+
+
   changeName: function() {
     //显示输入框
     this.setData({
@@ -273,9 +275,6 @@ Page({
       //给后端传userid
       success: function(res) {
         if (res.data.code === 1) { //如果用户有加入过的房间数据
-          wx.showToast({
-            title:''
-          })
           console.log(res.data.data);
           that.setData({
             joinroom: res.data.data,
@@ -308,6 +307,7 @@ Page({
       complete: function(res) {
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
+        wx.hideLoading();
       },
     })
     wx.showLoading({
@@ -335,6 +335,7 @@ Page({
         }
       })
     }else{
+     
       this.setData({
         value: app.globalData.userInfo.nickName
       })

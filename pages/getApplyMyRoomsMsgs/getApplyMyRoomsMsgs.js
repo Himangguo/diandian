@@ -60,6 +60,10 @@ Page({
         })
       },
       complete: function () {
+        // 将所有未读消息清除
+        app.globalData.applyCount = 0;
+        app.globalData.applyCome = false;
+        console.log("将所有未读消息设为已读");
         wx.hideLoading();
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();

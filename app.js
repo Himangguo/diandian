@@ -1,17 +1,43 @@
 App({
+  /**
+   * 监听属性 并执行监听函数
+   * params beObservedVal(被监听者),fn(计算回调函数)
+   */
+  observe(beObservedObj,key,fn){
+    let val = beObservedObj[key]; // 设置默认值
+    Object.defineProperty(beObservedObj, key,{
+      configurable:true,
+      enumerable:true,
+      set:function(newVal){
+        val = newVal;
+        fn&&fn(newVal);
+      },
+      get:function(){
+        return val;
+      }
+    })
+  },
     /**
      *接收申请信息
      */
   receiveApply:function(){
+    console.log("开始监听申请消息");
       let that = this;
         // 监听申请信息
         wx.request({
             method:'get',
             url:that.globalData.urlCreated('/message/receiveMessage',that.globalData.userid),
             success(res) {
-                console.log("接收到一个申请");
-
-                that.receiveApply();
+                console.log("接收到申请");
+                console.log(res.data.data);
+                // 未读消息 + 1
+                that.globalData.applyCount+=res.data.data.length;
+                that.globalData.applyCome = true;
+            },
+            complete(){
+              console.log("一轮查询结束");
+              // 递归轮询
+              that.receiveApply();
             }
         })
       } ,
@@ -28,6 +54,8 @@ App({
             console.log("登录成功");
             // 将userid保存在全局app中
             that.globalData.userid = res.data.data;
+            // 开始轮询申请消息
+            that.receiveApply();
           }else if(res.data.code === -1){
             console.log("登录失败，失败信息："+res.data.message);
           }
@@ -178,7 +206,9 @@ App({
     userInfo: null,
     openid: null,
     userid: null,
-    ifNowAuth:false,
-    url: '192.168.43.232:8080/diandian'
+    ifNowAuth:false, // 标记用户信息权限
+    applyCome:false, // 标记申请消息
+    applyCount:0,
+    url: '192.168.1.102:8080/diandian'
   }
 })

@@ -1,4 +1,4 @@
-// pages/myroom/myroom.js
+let temp = require('../../template/wxmlTemp/newApply.js');
 const app = getApp();
 Page({
 
@@ -11,6 +11,31 @@ Page({
     haveData: false,
     openid: '',
     roomlist: null,
+    applyCount:app.globalData.applyCount,
+  },
+  /**
+   * 自动计算属性
+   */
+  computer:{
+    applyCount:function(val){
+      this.setData({
+        applyCount:val
+      })
+    }
+  },
+  openToast: function (e) {
+    // 当前申请数
+    let count = e.currentTarget.dataset.count;
+    wx.showModal({
+      title: '新申请',
+      content: '如需查看请前往【申请列表】查看',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        }
+      }
+    })
   },
   //用户点击了某房间
   gocreatedroom: function(event) {
@@ -80,7 +105,10 @@ Page({
 
   },
   onLoad: function(options) {
+    console.dir(temp.temp)
     var that = this;
+    // 设置被监听对象和计算属性
+    app.observe(app.globalData,"applyCount",this.computer["applyCount"].bind(this))
     this.ifuserinfo();
     //定时器time0：监听用户信息是否获取到，如果获取到则隐藏授权栏
     var time0=setInterval(function(){
@@ -97,6 +125,7 @@ Page({
         clearInterval(time1); //清除定时器
         //拿所有创建房间数据
         that.fetchData();
+
       }
     }, 1000)
   },
@@ -149,5 +178,4 @@ Page({
     this.fetchData(); //重新加载资源
 
   }
-
 })

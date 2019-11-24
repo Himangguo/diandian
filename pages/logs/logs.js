@@ -1,4 +1,4 @@
-//获取应用实例
+let temp = require('../../template/wxmlTemp/newApply.js');
 const app = getApp();
 var base1 = "/images/关于.png";
 Page({
@@ -6,10 +6,12 @@ Page({
     ifAuth:false,
     motto: 'Hello World',
     userInfo: null,
-
     icon: ''
   },
+
+
   onLoad: function() {
+  
       if (!app.globalData.userInfo){
           this.setData({
               isload:false

@@ -1,0 +1,7 @@
+<template name="newApplyCount">
+<view class="newApplyCount" wx:if="{{count>0}}" data-count="{{count}}" catchtap="openToast">
+<image src="/images/message.png" mode="aspectFit" class="messageIcon"></image>
+<view class="countStyle">{{count}}</view>
+</view>
+
+</template>

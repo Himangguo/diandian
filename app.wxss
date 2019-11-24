@@ -241,3 +241,24 @@ view{
 .ending:hover {
   background: rgb(237, 236, 232);
 }
+.messageIcon{
+  width:30px;
+  height: 30px; 
+}
+.newApplyCount{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  left: 10vw;
+  bottom: 20px;
+  z-index: 999;
+}
+.countStyle{
+  width: 30px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
