@@ -251,7 +251,7 @@ view{
   align-items: center;
   position: fixed;
   left: 10vw;
-  bottom: 20px;
+  bottom: 200px;
   z-index: 999;
 }
 .countStyle{

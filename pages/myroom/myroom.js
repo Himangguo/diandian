@@ -11,17 +11,7 @@ Page({
     haveData: false,
     openid: '',
     roomlist: null,
-    applyCount:app.globalData.applyCount,
-  },
-  /**
-   * 自动计算属性
-   */
-  computer:{
-    applyCount:function(val){
-      this.setData({
-        applyCount:val
-      })
-    }
+    messageCount:app.globalData.applyCount
   },
   openToast: function (e) {
     // 当前申请数
@@ -36,6 +26,9 @@ Page({
         }
       }
     })
+  },
+  testAdd(){
+    app.globalData.applyCount++;
   },
   //用户点击了某房间
   gocreatedroom: function(event) {
@@ -108,7 +101,7 @@ Page({
     console.dir(temp.temp)
     var that = this;
     // 设置被监听对象和计算属性
-    app.observe(app.globalData,"applyCount",this.computer["applyCount"].bind(this))
+    //app.observe(app.globalData,"applyCount",this.computer["applyCount"].bind(this))
     this.ifuserinfo();
     //定时器time0：监听用户信息是否获取到，如果获取到则隐藏授权栏
     var time0=setInterval(function(){
@@ -128,6 +121,24 @@ Page({
 
       }
     }, 1000)
+  },
+  /**
+   * 页面显示事件
+   */
+  onShow:function(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0,
+        messageCount:app.globalData.applyCount
+      })
+      // 设置被监听对象和计算属性
+      app.observe(app.globalData,"applyCount",(newVal)=>{
+        this.getTabBar().setData({
+          messageCount:newVal
+        })
+      })
+  }
   },
   getUserInfo: function(e) {
     if (e.detail.userInfo) {

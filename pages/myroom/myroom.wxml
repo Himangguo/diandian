@@ -1,10 +1,9 @@
 <!--pages/myroom/myroom.wxml-->
-<!--引入模板文件-->
+<!--引入模板文件
 <import src="/template/wxmlTemp/newApply.wxml"/>
-<template is="newApplyCount" data="{{count:applyCount}}" />
+<template is="newApplyCount" data="{{count:applyCount}}" />-->
 
 <view class='contain'>
-
 <view class='fontmyroom'>
 <text >我的课程列表:</text>
 <button  class='buttonstyle' catchtap="createattence">创建</button>

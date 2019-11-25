@@ -6,10 +6,12 @@ Page({
     ifAuth:false,
     motto: 'Hello World',
     userInfo: null,
-    icon: ''
+    icon: '',
   },
 
-
+    testAdd(){
+        app.globalData.applyCount++;
+    },
   onLoad: function() {
   
       if (!app.globalData.userInfo){
@@ -33,6 +35,19 @@ Page({
 
   },
     onShow(){
+      if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          selected: 3,
+            messageCount:app.globalData.applyCount
+        })
+          // 设置被监听对象和计算属性
+          app.observe(app.globalData,"applyCount",(newVal)=>{
+              this.getTabBar().setData({
+                  messageCount:newVal
+              })
+          })
+        }
         if (app.globalData.ifNowAuth){
             this.setData({
                 userInfo:app.globalData.userInfo

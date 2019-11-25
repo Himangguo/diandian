@@ -16,7 +16,9 @@ Page({
     noApplyiImageUrl:'/images/applyImage.png',
 
   },
-
+  testAdd(){
+    app.globalData.applyCount++;
+  },
   /**
    * 获取所有申请加入我的房间的消息
    */
@@ -37,11 +39,11 @@ Page({
           let applyedList = res.data.data.filter((item) => {
             return item.roomapply.dealresult !== null //当isread == 1时说明已审批
           })
-          for(var item of noApplyList){
+          for(let item of noApplyList){
             item.sendtime = app.globalData.timeFormat.getTime(item.sendtime);
             item.roomapply.dealtime = app.globalData.timeFormat.getTime(item.roomapply.dealtime);
           }
-          for (var item of applyedList) {
+          for (let item of applyedList) {
             item.sendtime = app.globalData.timeFormat.getTime(item.sendtime);
             item.roomapply.dealtime = app.globalData.timeFormat.getTime(item.roomapply.dealtime);
           }
@@ -60,10 +62,6 @@ Page({
         })
       },
       complete: function () {
-        // 将所有未读消息清除
-        app.globalData.applyCount = 0;
-        app.globalData.applyCome = false;
-        console.log("将所有未读消息设为已读");
         wx.hideLoading();
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
@@ -86,10 +84,22 @@ Page({
       success(res) {
         console.log('成功，后台返回数据：',res.data)
         if (res.data.code === 1){
+          if (typeof that.getTabBar === 'function' && that.getTabBar()) {
+            // 未读消息 - 1
+            app.globalData.applyCount--;
+            // 当前页面的applyCount - 1
+            that.getTabBar().setData({
+              messageCount:app.globalData.applyCount
+            })
+          }
+          }
+          // 刷新当前页面
+        that.getAllApply(); //重新加载资源
           wx.showToast({
             title:'操作成功'
           })
-        }
+
+
       },
       fail(res) {
         console.log(res.data)
@@ -127,10 +137,26 @@ Page({
     }
 
   },
+
   /**
    * 监听页面显示
    */
   onShow(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1,
+        messageCount:app.globalData.applyCount
+      })
+      // 设置被监听对象和计算属性
+      app.observe(app.globalData,"applyCount",(newVal)=>{
+        console.log("被监听者改变事件发生")
+        this.getTabBar().setData({
+          messageCount:newVal
+        })
+      })
+
+      }
     if (app.globalData.ifNowAuth){
       this.getAllApply();
     }

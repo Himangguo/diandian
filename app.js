@@ -9,6 +9,7 @@ App({
       configurable:true,
       enumerable:true,
       set:function(newVal){
+        console.log("app.globalData.applyCount被修改为",newVal)
         val = newVal;
         fn&&fn(newVal);
       },
@@ -30,14 +31,11 @@ App({
             success(res) {
                 console.log("接收到申请");
                 console.log(res.data.data);
-                // 未读消息 + 1
-                that.globalData.applyCount+=res.data.data.length;
-                that.globalData.applyCome = true;
+                // 未读消息 
+                that.globalData.applyCount = res.data.data;
             },
-            complete(){
-              console.log("一轮查询结束");
-              // 递归轮询
-              that.receiveApply();
+            complete(res){
+              console.log("一轮查询结束",res);
             }
         })
       } ,
@@ -200,7 +198,7 @@ App({
 
             console.log(timestamp,Y + M + D);
             return Y + M + D ;
-        },
+        }
 
     },
     userInfo: null,
@@ -209,6 +207,6 @@ App({
     ifNowAuth:false, // 标记用户信息权限
     applyCome:false, // 标记申请消息
     applyCount:0,
-    url: '192.168.1.102:8080/diandian'
+    url: '192.168.43.232:8080/diandian'
   }
 })

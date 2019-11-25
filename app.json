@@ -17,7 +17,8 @@
     "pages/testView/testView",
     "pages/Join/joincheck/joincheck",
     "pages/Create/alterRoominf/alterRoominf",
-    "pages/Create/getStudentStatistics/getStudentStatistics"
+    "pages/Create/getStudentStatistics/getStudentStatistics",
+    "custom-tab-bar/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -26,6 +27,7 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "custom": true,
     "selectedColor": "#6bcb4a",
     "list": [
       {

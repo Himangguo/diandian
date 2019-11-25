@@ -16,7 +16,9 @@ Page({
     focus: true,
 
   },
-
+  testAdd(){
+    app.globalData.applyCount++;
+  },
 
   changeName: function() {
     //显示输入框
@@ -192,10 +194,19 @@ Page({
             // 位置获取失败
             fail(err) {
               console.log("获取位置失败：", err)
-              wx.showToast({
-                title: "获取位置失败",
-                image: "/images/warning.png"
-              })
+              // 如果是GPS信号不好或者没开GPS
+              if (err.errCode == 2){
+                wx.showToast({
+                  title: "检查GPS状态",
+                  image: "/images/warning.png"
+                })
+              }else{
+                wx.showToast({
+                  title: "获取位置失败",
+                  image: "/images/warning.png"
+                })
+              }
+
             }
           })
 
@@ -229,11 +240,11 @@ Page({
     this.setData({
       inputVal: e.detail.value
     });
-    console.log(Number(e.detail.value));
+    console.log(Number(e.detail.value),typeof(e.detail.value));
     //如果输入的不是空值，且不是NaN（只有NaN不和自身相等）
     if (e.detail.value && Number(e.detail.value) === Number(e.detail.value)) {
       wx.request({
-        url: app.globalData.urlCreated('/room/getRoomById', e.detail.value),
+        url: app.globalData.urlCreated('/room/getRoomByRoomNumber', e.detail.value),
         success: function(res) {
           console.log(res.data);
           if (res.data.code === 1 && res.data.data) {
@@ -348,6 +359,19 @@ Page({
    * 监听页面显示
    */
   onShow(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2,
+        messageCount:app.globalData.applyCount
+      })
+      // 设置被监听对象和计算属性
+      app.observe(app.globalData,"applyCount",(newVal)=>{
+        this.getTabBar().setData({
+          messageCount:newVal
+        })
+      })
+      }
     if (app.globalData.ifNowAuth){
       this.fetchData();
     }

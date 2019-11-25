@@ -1,6 +1,4 @@
-<!--引入模板文件-->
-<import src="/template/wxmlTemp/newApply.wxml"/>
-<template is="newApplyCount" data="{{count:applyCount}}" />
+
 <view class="container">
   <view class="userinfo">
     <block class="touxiang">
