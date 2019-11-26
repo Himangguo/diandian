@@ -1,4 +1,7 @@
 <view class='contain'>
+    <modal hidden="{{hiddenmodalput}}" title="请输入迟到时间" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+        <input type='number'placeholder="请输入整数，单位为分钟" value="{{lateTime}}" bindinput='formLateTime' auto-focus/>
+    </modal>
   <view class="header">
       <view class="back" bindtap="backing">返回</view>
   <view class="signed" bindtap="chooseSigned" style="background:{{buttonColor}};color:{{fontColor}}">已签  {{signed}}/{{listNum}}</view>
@@ -9,21 +12,40 @@
    <view class="studentList">
       <view class="stuInfBox" wx:for="{{signedOrnullSignStu}}" wx:key="{{item.id}}">
       <view class="stuinfLeft">
+       <image src="/images/manImage.png" wx:if="{{item.sex == 1}}" mode="aspectFit" class="manImage"></image>
+          <image src="/images/womanImage.png" wx:if="{{item.sex == 2}}" mode="aspectFit" class="womanImage"></image>
        <view class="stuName">{{item.lists.remarkname}}</view>
-          <view class="stuSignTime">{{item.signTime}}</view>
       </view>
       <view class="stuinfRight">
-          <view class="stuStatus">{{item.status}}</view>
-          <view class="changeStatus" wx:if="{{changeButtonview}}" bindtap="changeStatus">修改状态</view>
-          <view class="fourChangeButton" wx:else >
-              <view class="itemChange" bindtap="forArrive" data-stuid="{{item.id}}">到达</view>
-              <view class="itemChange" bindtap="forLate" data-stuid="{{item.id}}">迟到</view>
-              <view class="itemChange" bindtap="forLeave" data-stuid="{{item.id}}">请假</view>
-              <view class="itemChange" bindtap="forAbsent" data-stuid="{{item.id}}">旷课</view>
-          </view>
+          <view class="stuStatus" wx:if="{{item.status == 0}}">未签</view>
+          <view class="stuStatus" wx:if="{{item.status == 1}}">到达</view>
+          <view class="stuStatus" wx:if="{{item.status == 2}}">迟到</view>
+          <view class="stuStatus" wx:if="{{item.status == 3}}">请假</view>
+          <view class="stuStatus" wx:if="{{item.status == 4}}">旷课</view>
+          <view class="changeStatus" wx:if="{{changeButtonview}}" bindtap="changeStatus" data-stuinf = "{{item}}">修改状态</view>
           </view>
       </view>
    </view>
 
    </scroll-view>
+</view>
+<!--修改状态提示框-->
+<view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+    <view class="modals-cancel" bindtap="hideModal"></view>
+    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+        <view class="page">
+            <view class="page__hd">
+                <text class="page__title">修改状态</text>
+            </view>
+            <view class="page__bd">
+                <view class="section">
+                    <radio-group class="radio-group" bindchange="radioChange">
+                        <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+                            <text>{{item.name}}</text>
+                        </radio>
+                    </radio-group>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>

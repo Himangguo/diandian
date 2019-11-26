@@ -207,6 +207,6 @@ App({
     ifNowAuth:false, // 标记用户信息权限
     applyCome:false, // 标记申请消息
     applyCount:0,
-    url: '192.168.43.232:8080/diandian'
+    url: '192.168.1.102:8080/diandian'
   }
 })

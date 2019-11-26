@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    itemId:null,
+    itemStatus:null,
+    hiddenmodalput:true,
     hiddens: true,
+    lateTime:30, // 迟到时间
     changeButtonview:true,
     roominf:null,
     socketOpen:false,
@@ -29,6 +33,14 @@ Page({
     signedOrnullSignStu:null,
     signedStu:[],
     nullSignStu:[],
+    hideModal:true, //模态框的状态  true-隐藏  false-显示
+    animationData:{},
+    items:[
+      {name: '到达',value: '1'},
+      {name: '迟到',value: '2'},
+      {name: '请假',value: '3'},
+      {name: '旷课',value: '4'}
+    ]
   },
   /**
    * 点击已签到按钮
@@ -74,7 +86,7 @@ Page({
   /**
    * 点击返回按钮
    */
-  backing: function() {
+  /*backing: function() {
    wx.showModal({
      title: '提醒',
      content: '取消本次考勤？',
@@ -88,6 +100,8 @@ Page({
    })
 
   },
+  */
+
   /**
    * 点击结束按钮
    */
@@ -113,14 +127,67 @@ Page({
     })
   },
   /**
+   * 单选框改变事件
+   * @param e
+   *
+   */
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    // 当前显示的item的id
+    let id = this.data.itemId;
+    if (e.detail.value == "到达"){
+      this.forArrive(id)
+    }
+    else if (e.detail.value == "迟到"){
+      this.forLate(id)
+    }
+    else if (e.detail.value == "请假"){
+      this.forLeave(id)
+    }
+    else if (e.detail.value == "旷课"){
+      this.forAbsent(id)
+    }
+
+
+
+  },
+  /**
+   * 遍历lists修改默认选项
+   */
+  changeRadioOptions:function(opt){
+    let lists = this.data.items;
+    for (let item of lists){
+      if (item.value == opt){
+        item.checked = 'true';
+      }else{
+        item.checked = '';
+      }
+    }
+
+    this.setData({
+      items:lists
+    })
+    console.log(this.data.items)
+  },
+  /**
    * 手动修改学生考勤状态
    */
-  changeStatus:function(){
-    let that=this;
-    //显示四个状态button
+  changeStatus:function(e){
+    // 当前点击的学生信息
+    let stuinf=e.currentTarget.dataset.stuinf;
     this.setData({
-      changeButtonview:false
+      itemId:stuinf.id,
+      itemStatus:stuinf.status
     })
+    console.log("当前学生id：",this.data.itemId)
+    console.log("当前学生status：",this.data.itemStatus)
+    let status = this.data.itemStatus;
+    // 修改当前lists中的默认选项
+    this.changeRadioOptions(status)
+
+    // 显示显示遮罩层
+    this.showModal();
+
 
   },
   /**
@@ -143,46 +210,88 @@ Page({
   /**
    * 修改为到达
    */
-  forArrive:function(e){
-    let stuid=e.currentTarget.dataset.stuid;
+  forArrive:function(stuid){
     this.changeStuStatus(stuid,1);
   },
   /**
    *修改为迟到
    */
-  forLate:function(e){
-    let stuid=e.currentTarget.dataset.stuid;
+  forLate:function(stuid){
     this.changeStuStatus(stuid,2);
   },
   /**
    *修改为请假
    */
-  forLeave:function(e){
-    let stuid=e.currentTarget.dataset.stuid;
+  forLeave:function(stuid){
     this.changeStuStatus(stuid,3);
   },
   /**
    *修改为旷课
    */
-  forAbsent:function(e){
-    let stuid=e.currentTarget.dataset.stuid;
+  forAbsent:function(stuid){
     this.changeStuStatus(stuid,4);
+  },
+  // 显示遮罩层
+  showModal: function () {
+    var that=this;
+    that.setData({
+      hideModal:false
+    })
+    var animation = wx.createAnimation({
+      duration: 600,//动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
+      timingFunction: 'ease',//动画的效果 默认值是linear
+    })
+    this.animation = animation
+    setTimeout(function(){
+      that.fadeIn();//调用显示动画
+    },200)
+  },
+
+  // 隐藏遮罩层
+  hideModal: function () {
+    var that=this;
+    var animation = wx.createAnimation({
+      duration: 800,//动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
+      timingFunction: 'ease',//动画的效果 默认值是linear
+    })
+    this.animation = animation
+    that.fadeDown();//调用隐藏动画
+    setTimeout(function(){
+      that.setData({
+        hideModal:true
+      })
+    },720)//先执行下滑动画，再隐藏模块
+
+  },
+
+  //动画集
+  fadeIn:function(){
+    this.animation.translateY(0).step()
+    this.setData({
+      animationData: this.animation.export()//动画实例的export方法导出动画数据传递给组件的animation属性
+    })
+  },
+  fadeDown:function(){
+    this.animation.translateY(300).step()
+    this.setData({
+      animationData: this.animation.export(),
+    })
   },
   /**
    * 变为签到，列表改变
    */
   signChange:function(that,jsonRes){
+    // 未签到的学生列表
     let studentList = that.data.nullSignStu;
     for (let index1 in studentList) {
-      console.log(studentList[index1]);
-
       if (studentList[index1].id === jsonRes.studentId) {
-        //将此学生加入已签到列表
+        // 改变此学生的考勤状态
+        studentList[index1].status = jsonRes.data
+        // 将此学生加入已签到列表
         let stulist = that.data.signedStu;
         stulist.push(studentList[index1])
         that.setData({
           signedStu: stulist,
-          changeButtonview: true  //隐藏改变按钮
         })
         //在未签到学生列表中移除此学生
         studentList.splice(index1, 1);
@@ -200,7 +309,20 @@ Page({
           nullSign:that.data.nullSign - 1,
           signed:that.data.signed + 1
         })
-
+        break;
+      }
+    }
+    // 已签到学生列表
+    let studentList2 = that.data.signedStu;
+    for (let index2 in studentList2) {
+      if (studentList2[index2].id === jsonRes.studentId) {
+        // 将其状态改变
+        studentList2[index2].status = jsonRes.data;
+        that.setData({
+          signedStu:studentList2,
+          signedOrnullSignStu: that.data.signedStu
+        })
+        break;
       }
     }
   },
@@ -208,15 +330,17 @@ Page({
    * 变为未签到，列表改变
    */
   nullSignChange:function(that,jsonRes){
-    let studentList = that.data.signedStu;  //已签到学生列表
+    //已签到学生列表
+    let studentList = that.data.signedStu;
     for (let index1 in studentList) {
       if (studentList[index1].id === jsonRes.studentId) {
+        // 改变此学生的考勤状态
+        studentList[index1].status = jsonRes.data
         //将此学生加入未签到列表
         let nullstulist = that.data.nullSignStu;
         nullstulist.push(studentList[index1])
         that.setData({
           nullSignedStu: nullstulist,
-          changeButtonview: true   //隐藏改变按钮
         })
         //在签到学生列表中移除此学生
         studentList.splice(index1, 1);
@@ -234,9 +358,25 @@ Page({
           nullSign:that.data.nullSign + 1,
           signed:that.data.signed - 1
         })
-
+        break;
       }
     }
+
+    // 未签到学生列表
+    let studentList2 = that.data.nullSignStu;
+    for (let index2 in studentList2) {
+      if (studentList2[index2].id === jsonRes.studentId) {
+        // 将其状态改变
+        studentList2[index2].status = jsonRes.data;
+        that.setData({
+          nullSignStu:studentList2,
+          signedOrnullSignStu: that.data.nullSignStu
+        })
+        break;
+      }
+    }
+
+
   },
 
   /**
@@ -244,20 +384,105 @@ Page({
    */
 
   onLoad: function(options) {
-    var that = this;
+    let that = this;
     console.log("房间inf:" , options.roominf);
     this.setData({
       roominf: JSON.parse(options.roominf)
     })
+    // 设置迟到时间
+    wx.showModal({
+      title:"迟到时间",
+      content:"是否需要设置迟到时间？",
+      cancelText:"不用了",
+      success(res) {
+        if (res.confirm){
+          console.log("用户点击了确认");
+          // 弹框输入迟到时间
+          that.setData({
+            hiddenmodalput:false
+          })
 
-    //进行socket连接
+
+        }else if (res.cancel){
+          console.log("用户点击了取消");
+          //给服务端发送考勤初始数据
+          let data = {
+            type: 'start',
+            data: that.data.roominf.id,
+          }
+          // 进行socket连接
+          that.socketConnection(data);
+        }
+
+
+
+      },
+
+
+    })
+
+
+  },
+
+  /**
+   * 表单输入事件
+   *
+   */
+  formLateTime:function(e){
+    console.log("改变lateTime:",e.detail.value)
+    if (typeof e.detail.value === "number"){
+      this.setData({
+        lateTime:e.detail.value
+      })
+    }
+
+  },
+  /**
+   * model确认事件
+   *
+   */
+  confirm: function(){
+    // 获取迟到时间
+    let lateTime = this.data.lateTime;
+    console.log("设置的迟到时间为：",lateTime)
+    if (typeof lateTime === "number"){
+      // 进行socket连接
+      this.socketConnection();
+      // 隐藏model
+      this.setData({
+        hiddenmodalput: true
+      })
+      //给服务端发送考勤初始数据
+      let data = {
+        type: 'start',
+        data: this.data.roominf.id,
+        lateTime:this.data.lateTime
+      }
+      // socket连接
+      this.socketConnection(data);
+    }else{
+      wx.showToast({
+        title:"时间不合法",
+        image:"/images/warning.png"
+      })
+    }
+
+  },
+  /**
+   * model取消事件
+   *
+   */
+  cancel: function(){
+    this.setData({
+      hiddenmodalput: true
+    });
+    // socket连接
     this.socketConnection();
-
   },
   /**
    * socket连接
    */
-  socketConnection: function() {
+  socketConnection: function(startData) {
 
     var that = this;
     var remindTitle = this.data.socketOpen ? '正在关闭' : '正在连接';
@@ -272,6 +497,7 @@ Page({
       wx.connectSocket({
         url: app.globalData.wsUrlCreated('/attendance/single/teacher')
       })
+
       //监听WebSocket错误
       wx.onSocketError(function(res) {
         that.setData({
@@ -280,6 +506,7 @@ Page({
         console.log('WebSocket连接打开失败，请检查！');
         wx.hideToast();
       })
+
       //监听WebSocket连接打开事件。
       wx.onSocketOpen(function(res) {
         //如果连接成功，将socketOpen设置为true
@@ -288,15 +515,13 @@ Page({
         })
         console.log('WebSocket连接已打开！');
         wx.hideToast();
-        //给服务端发送考勤初始数据
-        let data = {
-          type: 'start',
-          data: that.data.roominf.id,
-        }
+
+
         //发送开始考勤
-        that.sendSocketMessage(data);
+        that.sendSocketMessage(startData);
 
       })
+
       //监听WebSocket接受到服务器的消息事件
       wx.onSocketMessage(function(res) {
         wx.hideLoading();
@@ -305,7 +530,7 @@ Page({
         let jsonRes=JSON.parse(res.data);
         /*******************监听考勤开始******************************/
         if (jsonRes.type === 'start') {
-          //若没成功
+          // 若没成功
           if (jsonRes.status === 0) {
             console.log('考勤未能成功');
             wx.showToast({
@@ -314,9 +539,14 @@ Page({
             })
 
 
-            //若成功了
+            // 若成功了
           } else if (jsonRes.status === 1) {
-            //将学生列表存入data中
+            // 设置初始状态都为0（未签）
+            for (let item of jsonRes.data){
+                item.status = 0;
+            }
+            console.log("初始化后的学生列表：",jsonRes.data)
+            // 将学生列表存入data中
             that.setData({
               nullSignStu:jsonRes.data,
               signedOrnullSignStu:jsonRes.data,
@@ -459,13 +689,6 @@ Page({
       }
     })
   
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
     /**
    * 生命周期函数--监听页面隐藏

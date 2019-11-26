@@ -7,7 +7,25 @@ Page({
     motto: 'Hello World',
     userInfo: null,
     icon: '',
+
+    hideModal:true, //模态框的状态  true-隐藏  false-显示
+    animationData:{},
+    items:[
+        {name: '到达',value: '1'},
+        {name: '迟到',value: '2'},
+        {name: '请假',value: '3'},
+        {name: '旷课',value: '4'}
+    ]
+
   },
+    /**
+     * 单选框改变事件
+     * @param e
+     *
+     */
+    radioChange: function (e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value)
+    },
 
     testAdd(){
         app.globalData.applyCount++;
@@ -54,6 +72,10 @@ Page({
             })
         }
     },
+    /**
+     * 授权按钮
+     *
+     */
   tapToAuthorize: function(){
       let that = this;
         //再授权
@@ -91,7 +113,11 @@ Page({
                 console.log("打开设置页失败，",err)
             }
         })
-    }
+    },
+
+
+
+
 
 
 })

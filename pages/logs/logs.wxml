@@ -1,5 +1,5 @@
 
-<view class="container">
+<view class="contain">
   <view class="userinfo">
     <block class="touxiang">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
@@ -16,24 +16,6 @@
          <view wx:if="{{userInfo.gender===0}}" class="weui-cell__ft">女</view>
     </view>
 </view>
-<view class="weui-cells">
-    <view class="weui-cell">
-        <view class="weui-cell__bd">
-            <text>城市</text>
-        </view>
-        <view class="weui-cell__ft">{{userInfo.city}}</view>
-    </view>
-</view>
-<view class="weui-cells">
-    <view class="weui-cell">
-        <view class="weui-cell__bd">
-            <text>国籍</text>
-        </view>
-        <view class="weui-cell__ft">{{userInfo.country}}</view>
-    </view>
-    </view>
-
-
 <view class="weui-cells__title">点点考勤</view>
 <view class="weui-cells">
 
@@ -48,4 +30,5 @@
     <button bindtap="tapToAuthorize" wx:if="{{!ifAuth}}">位置授权</button>
   <button class='button'>使用帮助</button>
   <button class='button'>意见反馈</button>
+
   </view>

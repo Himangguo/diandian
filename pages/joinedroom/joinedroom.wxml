@@ -67,7 +67,6 @@
     <input class='input1' type='text' placeholder='起个霸气的昵称吧' name="nickname" focus="{{focus}}" value="{{value}}" />
     <button form-type="submit" class='button_q'>确定</button>
     <button catchtap='cancel' class='button_q'>取消</button>
-
   </form>
 
 </view>
