@@ -245,7 +245,7 @@ view{
 }
 .messageIcon{
   width:30px;
-  height: 30px; 
+  height: 30px;
 }
 .newApplyCount{
   display: flex;

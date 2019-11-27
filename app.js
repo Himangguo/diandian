@@ -29,13 +29,21 @@ App({
             method:'get',
             url:that.globalData.urlCreated('/message/receiveMessage',that.globalData.userid),
             success(res) {
+              console.log(res.data);
+              if(res.data.code == 1){
                 console.log("接收到申请");
                 console.log(res.data.data);
-                // 未读消息 
+                // 未读消息
                 that.globalData.applyCount = res.data.data;
+              }
+
             },
             complete(res){
               console.log("一轮查询结束",res);
+              // 隔10秒查一次申请情况
+              setTimeout(()=>{
+                that.receiveApply();
+              },10000);
             }
         })
       } ,
@@ -198,7 +206,24 @@ App({
 
             console.log(timestamp,Y + M + D);
             return Y + M + D ;
-        }
+        },
+      /**
+       * @params timetamp-时间戳
+       * @return {string} 11-10 13:02
+       */
+      getMHS(timestamp){
+        var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var M =
+            (date.getMonth() + 1 < 10
+                ? "0" + (date.getMonth() + 1)
+                : date.getMonth() + 1) + "-";
+        var D = date.getDate() + " ";
+        let h = date.getHours() + ":";
+        let m = date.getMinutes();
+        console.log(timestamp,M + D + h + m)
+        return M + D + h + m ;
+
+      }
 
     },
     userInfo: null,
@@ -207,6 +232,6 @@ App({
     ifNowAuth:false, // 标记用户信息权限
     applyCome:false, // 标记申请消息
     applyCount:0,
-    url: '192.168.1.102:8080/diandian'
+    url: '192.168.1.106:8080/diandian'
   }
 })
