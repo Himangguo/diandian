@@ -27,6 +27,13 @@ Page({
     })
   },
   formSubmit: function(e) {
+    if (e.detail.value.nickname == ""){
+      wx.showToast({
+        title:"备注为必填项",
+        image:"/images/warning.png"
+      })
+      return;
+    }
     //获取到表单数据
     var name = e.detail.value.nickname;
     this.setData({
@@ -174,7 +181,7 @@ Page({
                   } else if (res.data.status === 0) {
                     console.log('签到失败：', res.data)
                     wx.showToast({
-                      title: '签到失败',
+                      title: res.data,  // 显示失败信息
                       image: '/images/warning.png',
                       duration: 2000
                     })
