@@ -80,7 +80,7 @@ Page({
           wx.startPullDownRefresh();
         } else if (res.data.code === -1) {
           wx.showToast({
-            title: '不能加入你房间',
+            title: res.data.data,
             image: '/images/warning.png',
           })
         }
@@ -181,7 +181,7 @@ Page({
                   } else if (res.data.status === 0) {
                     console.log('签到失败：', res.data)
                     wx.showToast({
-                      title: res.data,  // 显示失败信息
+                      title: res.data.data,  // 显示失败信息
                       image: '/images/warning.png',
                       duration: 2000
                     })
