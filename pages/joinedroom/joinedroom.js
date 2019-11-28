@@ -147,8 +147,8 @@ Page({
           })
           wx.getLocation({
             type: 'gcj02',
-            isHighAccuracy: "true",
-            highAccuracyExpireTime: 4000,
+           // isHighAccuracy: "true",
+           // highAccuracyExpireTime: 4000,
             success(res) {
               console.log('获取位置成功');
               latitude = res.latitude
