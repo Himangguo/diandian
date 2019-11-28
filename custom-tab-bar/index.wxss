@@ -44,7 +44,7 @@
   justify-content: center;
   position: absolute;
   top: 5px;
-  right: 10%;
+  right: 15%;
   padding: 1px 5px;
   background-color: red;
   color: white;
