@@ -475,8 +475,14 @@ Page({
         this.setData({
             hiddenmodalput: true
         });
+        //给服务端发送考勤初始数据
+        let data = {
+            type: 'start',
+            data: this.data.roominf.id,
+            lateTime: this.data.lateTime
+        }
         // socket连接
-        this.socketConnection();
+        this.socketConnection(data);
     },
     /**
      * socket连接
