@@ -80,7 +80,7 @@ Page({
           wx.startPullDownRefresh();
         } else if (res.data.code === -1) {
           wx.showToast({
-            title: res.data.data,
+            title: res.data.message,
             image: '/images/warning.png',
           })
         }
