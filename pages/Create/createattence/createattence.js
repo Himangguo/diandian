@@ -6,7 +6,7 @@ Page({
    */
   data: {
     distance: '',
-    range: [5, 10, 20, 50, 100],
+    range: [5, 10, 20, 50, 100,100000],
     switch1Checked: 0,
   },
   selectDis: function(event) {
