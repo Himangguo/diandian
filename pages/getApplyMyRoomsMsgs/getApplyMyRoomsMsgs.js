@@ -94,7 +94,7 @@ Page({
           }
           }
           // 刷新当前页面
-        that.getAllApply(); //重新加载资源
+        that.getAllApply(); // 重新加载资源
           wx.showToast({
             title:'操作成功'
           })

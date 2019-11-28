@@ -35,6 +35,8 @@ App({
                 console.log(res.data.data);
                 // 未读消息
                 that.globalData.applyCount = res.data.data;
+              }else if (res.data.code == 0){
+                that.globalData.applyCount = 0;
               }
 
             },
@@ -202,7 +204,7 @@ App({
                 (date.getMonth() + 1 < 10
                     ? "0" + (date.getMonth() + 1)
                     : date.getMonth() + 1) + "-";
-            var D = date.getDate() + " ";
+            var D = date.getDate();
 
             console.log(timestamp,Y + M + D);
             return Y + M + D ;
@@ -218,8 +220,12 @@ App({
                 ? "0" + (date.getMonth() + 1)
                 : date.getMonth() + 1) + "-";
         var D = date.getDate() + " ";
-        let h = date.getHours() + ":";
-        let m = date.getMinutes();
+        let h = (date.getHours() < 10
+            ? "0" +(date.getHours())
+            : date.getHours()) + ":";
+        let m = (date.getMinutes() < 10
+            ? "0" +(date.getMinutes())
+            : date.getMinutes()) + ":";
         console.log(timestamp,M + D + h + m)
         return M + D + h + m ;
 
@@ -232,6 +238,6 @@ App({
     ifNowAuth:false, // 标记用户信息权限
     applyCome:false, // 标记申请消息
     applyCount:0,
-    url: '192.168.1.106:8080/diandian'
+    url: '192.168.1.102:8080/diandian'
   }
 })
