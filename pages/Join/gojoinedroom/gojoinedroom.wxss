@@ -1,4 +1,19 @@
 .roomdetail2{
   padding:30rpx 0 30rpx 150rpx;
+  position: relative;
+}
+.sign{
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width:80px;
+  border: 1px solid;
+  text-align: center;
+  padding: 5px;
+  height: 30px;
+  background: #f36838;
+  color: white;
+  line-height: 30px;
 }
 

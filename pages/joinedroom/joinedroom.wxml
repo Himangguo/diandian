@@ -52,7 +52,7 @@
         <view class='textarea'>
           <text class='textfont'>{{item.note}}</text>
         </view>
-        <view class='signin' style='line-height:{{lineHeight}}' catchtap='tosign' data-createdid="{{item.userid}}" data-roomid="{{item.id}}">
+        <view class='signin' style='line-height:{{lineHeight}}' catchtap='tosign'  data-roomid="{{item.id}}">
         签到
         </view>
       </view>

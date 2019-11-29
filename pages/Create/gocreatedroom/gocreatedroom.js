@@ -49,6 +49,18 @@ Page({
               wx.reLaunch({
                 url: '/pages/Create/attendancing/attendancing?roominf=' + JSON.stringify(that.data.roominf)
               })
+            },
+            fail: function(){
+              wx.showModal({
+                title: '用户未授权',
+                content: '如需正常使用小程序功能，请按确定并且在【我的】页面中点击授权按钮，点击位置信息勾选。',
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
+                  }
+                }
+              })
             }
           })
 
