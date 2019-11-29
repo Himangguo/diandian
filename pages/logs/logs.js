@@ -8,14 +8,6 @@ Page({
     userInfo: null,
     icon: '',
 
-    hideModal:true, //模态框的状态  true-隐藏  false-显示
-    animationData:{},
-    items:[
-        {name: '到达',value: '1'},
-        {name: '迟到',value: '2'},
-        {name: '请假',value: '3'},
-        {name: '旷课',value: '4'}
-    ]
 
   },
     /**
@@ -33,9 +25,6 @@ Page({
   onLoad: function() {
   
       if (!app.globalData.userInfo){
-          this.setData({
-              isload:false
-          })
           wx.showModal({
               title: '用户未授权',
               content: '如需正常使用小程序，请按确定并且在【创建课程】页面中点击授权按钮',
@@ -53,6 +42,7 @@ Page({
 
   },
     onShow(){
+        let that =this;
       if (typeof this.getTabBar === 'function' &&
         this.getTabBar()) {
         this.getTabBar().setData({
@@ -70,7 +60,22 @@ Page({
             this.setData({
                 userInfo:app.globalData.userInfo
             })
-        }
+            wx.getSetting({
+                success(res){
+                    //如果用户之前拒绝位置授权
+                    if (res.authSetting['scope.userLocation'] == false) {
+                        that.setData({
+                            ifAuth:false
+                        })
+                    }else{
+                        that.setData({
+                            ifAuth:true
+                        })
+                    }
+                }
+
+            })
+            }
     },
     /**
      * 授权按钮
@@ -96,7 +101,7 @@ Page({
                         title:"授权成功"
                     })
                 }
-                else{
+                else if(res.authSetting["scope.userLocation"] === false){
                     wx.showModal({
                         title: '用户未授权',
                         content: '如需正常使用小程序，请点击授权按钮，选择位置信息并勾选。',

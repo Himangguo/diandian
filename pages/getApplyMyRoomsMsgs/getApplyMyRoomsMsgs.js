@@ -31,6 +31,7 @@ Page({
       method:'get',
       url:app.globalData.urlCreated('/message/getApplyMyRoomsMsgs',app.globalData.userid),
       success(res) {
+        wx.hideLoading();
         console.log('服务端返回的数据：',res.data);
         if(res.data.code == 1){
           let noApplyList = res.data.data.filter((item) => {
@@ -62,7 +63,6 @@ Page({
         })
       },
       complete: function () {
-        wx.hideLoading();
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
       }

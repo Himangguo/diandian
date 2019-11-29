@@ -105,8 +105,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -115,6 +113,20 @@ App({
             }
           })
         }
+      }
+    })
+    // 监听网络连接情况
+      wx.onNetworkStatusChange(function (res) {
+      if (res.networkType == 'none') {
+        console.log("网络断开连接")
+        that.globalData.nonetwork = true;
+        wx.showLoading({
+          title:"网络重连中"
+        })
+      } else {
+        console.log("网络启动连接")
+        that.globalData.nonetwork = false;
+        wx.hideLoading();
       }
     })
   },
@@ -137,6 +149,8 @@ App({
       }
     })
   },
+
+
   globalData: {
     //普通http请求url制造器
     urlCreated(params, ...query) {
@@ -225,7 +239,7 @@ App({
             : date.getHours()) + ":";
         let m = (date.getMinutes() < 10
             ? "0" +(date.getMinutes())
-            : date.getMinutes()) + ":";
+            : date.getMinutes());
         console.log(timestamp,M + D + h + m)
         return M + D + h + m ;
 
@@ -238,6 +252,7 @@ App({
     ifNowAuth:false, // 标记用户信息权限
     applyCome:false, // 标记申请消息
     applyCount:0,
-    url: '192.168.1.102:8080/diandian'
+    nonetwork: false, // 网络情况
+    url: '10.23.117.79:8080/diandian'
   }
 })

@@ -14,7 +14,7 @@
   <component name="ProjectId" id="1SmjbKZHbUoqkd6VuF0ZofTg21y" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/前端代码/node/测试json" />
+    <property name="last_opened_file_path" value="D:/前端代码/socketio" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -64,7 +64,9 @@
       <workItem from="1574490194000" duration="23815000" />
       <workItem from="1574669552566" duration="16474000" />
       <workItem from="1574747759909" duration="16315000" />
-      <workItem from="1574848551650" duration="4161000" />
+      <workItem from="1574848551650" duration="5001000" />
+      <workItem from="1574923996141" duration="14134000" />
+      <workItem from="1574992370069" duration="8019000" />
     </task>
     <servers />
   </component>
