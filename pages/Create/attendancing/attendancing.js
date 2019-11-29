@@ -11,7 +11,7 @@ Page({
         itemStatus: null,
         hiddenmodalput: true,
         hiddens: true,
-        lateTime: 30, // 迟到时间
+        lateTime: 789456, // 迟到时间
         changeButtonview: true,
         roominf: null,
         socketOpen: false,
@@ -33,6 +33,9 @@ Page({
         signedOrnullSignStu: null,
         signedStu: [],
         nullSignStu: [],
+        minute:0,
+        second:0,
+        flowTime:null,
         hideModal: true, //模态框的状态  true-隐藏  false-显示
         animationData: {},
         items: [
@@ -485,16 +488,49 @@ Page({
         this.socketConnection(data);
     },
     /**
+     * 时间流动
+     */
+    timeFlow:function(){
+        console.log("设置的迟到时间：",this.data.lateTime)
+        setInterval(()=>{
+            if (this.data.minute == this.data.lateTime){
+                wx.showModal({
+                    title:'提醒',
+                    content:'已到设置的迟到时间,'+this.data.lateTime+'分钟',
+                    showCancel:false,
+                    confirmText:'知道了',
+                    success(res) {
+                        if (res.confirm){
+                            console.log('用户点击了确认');
+                        }
+                    }
+                })
+            }
+            if (this.data.second < 59){
+                this.setData({
+                    second:this.data.second+1
+                })
+            }else{
+                this.setData({
+                    minute:this.data.minute+1
+                })
+                this.setData({
+                    second:0
+                })
+            }
+
+
+        },1000)
+    },
+    /**
      * socket连接
      */
     socketConnection: function (startData) {
 
         var that = this;
         var remindTitle = this.data.socketOpen ? '正在关闭' : '正在连接';
-        wx.showToast({
-            title: remindTitle,
-            icon: 'loading',
-            duration: 10000
+        wx.showLoading({
+            title:remindTitle
         })
         if (!this.data.socketOpen) {
             //创建一个 WebSocket 连接；
@@ -546,6 +582,8 @@ Page({
 
                         // 若成功了
                     } else if (jsonRes.status === 1) {
+                        // 时间开始流动
+                        that.timeFlow();
                         // 设置初始状态都为0（未签）
                         for (let item of jsonRes.data) {
                             item.status = 0;
@@ -610,18 +648,51 @@ Page({
                     }
                 }
             })
-            //监听WebSocket关闭
+            // 监听WebSocket关闭
             wx.onSocketClose(function (res) {
+                wx.hideLoading();
                 that.setData({
                     socketOpen: false
                 })
                 console.log('WebSocket 已关闭！');
-                wx.hideToast();
+                // 如果网络连接断开
+                if(app.globalData.nonetwork){
+                    wx.showModal({
+                        title:'断开',
+                        content:'连接失败，请检查网络连接后重连',
+                        showCancel:false,
+                        confirmText:'重连',
+                        success(res) {
+                            if (res.confirm){
+                                // 重连
+                                that.socketConnection();
+                            }
+                        }
+
+                    })
+                }
+
+            })
+            // 监听WebSocket错误
+            wx.onSocketError(function (res) {
+                console.log('WebSocket 错误！')
+                wx.closeSocket((res) => {
+                    // 如果成功关闭
+                    if (res.status === "success") {
+                        wx.showToast({
+                            title: '断开连接',
+                        })
+                    } else if (res.status === "error") {
+                        wx.showToast({
+                            title: '遇到error',
+                        })
+                    }
+                });
             })
         } else {
             //关闭WebSocket连接。
             wx.closeSocket((res) => {
-                //如果成功关闭
+                // 如果成功关闭
                 if (res.status === "success") {
                     wx.showToast({
                         title: '成功结束',

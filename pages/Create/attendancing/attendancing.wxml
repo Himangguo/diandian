@@ -4,14 +4,13 @@
         <input type='number' placeholder="请输入整数，单位为分钟" value="{{lateTime}}" bindinput='formLateTime' auto-focus/>
     </modal>
     <view class="header">
-        <view class="back" bindtap="backing">返回</view>
         <view class="signed" bindtap="chooseSigned" style="background:{{buttonColor}};color:{{fontColor}}">已签
             {{signed}}/{{listNum}}
         </view>
         <view class="nullSign" bindtap="chooseNullSign" style="background:{{buttonColor_1}};color:{{fontColor_1}}">未签
             {{nullSign}}/{{listNum}}
         </view>
-        <view class="over" bindtap="overing">结束</view>
+
     </view>
     <scroll-view scroll-y="true" class="scroll-view_H">
         <view class="studentList">
@@ -19,8 +18,10 @@
                 <view class="stuinfLeft">
                     <image src="/images/manImage.png" wx:if="{{item.sex == 1}}" mode="aspectFit"
                            class="manImage"></image>
-                    <image src="/images/womanImage.png" wx:if="{{item.sex == 2}}" mode="aspectFit"
+                    <image src="/images/womanImage.png" wx:elif="{{item.sex == 2}}" mode="aspectFit"
                            class="womanImage"></image>
+                    <image src="/images/noneImage.png" wx:else mode="aspectFit"
+                           class="noneImage"></image>
                     <view class="stuName">{{item.lists.remarkname}}</view>
                 </view>
                 <view class="stuinfRight">
@@ -41,6 +42,12 @@
         </view>
 
     </scroll-view>
+    <view class="footer">
+        <view  wx:if="{{minute == 0}}" class="second">{{second}}</view>
+        <view  wx:else><span class="minute">{{minute}}</span><span>:</span><span class="second">{{second}}</span></view>
+        <view class="over" bindtap="overing">结束</view>
+    </view>
+
 </view>
 <!--修改状态提示框-->
 <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
