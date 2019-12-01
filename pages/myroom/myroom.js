@@ -49,8 +49,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   fetchData: function() {
-    var that = this;
-
+    let that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: app.globalData.urlCreated('/user/getMyRoomsById', app.globalData.userid),
       success: function(res) {
@@ -62,7 +64,7 @@ Page({
             haveData: true
           })
           wx.showToast({
-            title: '',
+            title: '加载成功',
           })
         } else if (res.data.code === 0) { // 如果数据为空
           that.setData({
@@ -91,26 +93,39 @@ Page({
         wx.stopPullDownRefresh();
       }
     })
-    wx.showLoading({
-      title: '加载中',
-    })
+
 
   },
   onLoad: function(options) {
     console.dir(temp.temp)
-    var that = this;
+    let that = this;
     // 设置被监听对象和计算属性
     //app.observe(app.globalData,"applyCount",this.computer["applyCount"].bind(this))
     this.ifuserinfo();
-    //定时器time0：监听用户信息是否获取到，如果获取到则隐藏授权栏
-    var time0=setInterval(function(){
-      if(app.globalData.userInfo){
-        clearInterval(time0);
-        that.setData({
-          haveUserInfo:true
+    //监听用户信息是否获取到，如果获取到则隐藏授权栏
+    if (app.globalData.userInfo) {
+      this.setData({
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          hasUserInfo: true
         })
       }
-    },1000)
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            hasUserInfo: true
+          })
+        }
+      })
+    }
     //监听userid是否拿到，如果拿到就获取考勤房间信息
     var time1 = setInterval(function() {
       if (app.globalData.userid) { //如果已经获得了userid
@@ -120,6 +135,7 @@ Page({
 
       }
     }, 1000)
+
   },
   /**
    * 页面显示事件
@@ -141,10 +157,9 @@ Page({
   },
   getUserInfo: function(e) {
     if (e.detail.userInfo) {
-      console.log("点击获取用户信息" + JSON.stringify(e));
       app.globalData.userInfo = e.detail.userInfo;
       this.setData({
-        haveUserInfo: true
+        hasUserInfo: true
       })
     }else{
       console.log("用户拒绝获取权限");

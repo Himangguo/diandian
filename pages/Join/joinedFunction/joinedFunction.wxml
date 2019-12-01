@@ -14,5 +14,13 @@
     </view>
     <view class="weui-cell__ft"></view>
   </navigator>
-  <button class='button'>分享房间</button>
+  <navigator class="weui-cell weui-cell_access" url="{{lookallperson}}">
+    <view class="weui-cell__hd">
+      <image src="/images/icon3.png" alt="xx" style="width:20px;height:20px;margin-right:5px;display:block"></image>
+    </view>
+    <view class="weui-cell__bd">
+      <text>房间用户一览</text>
+    </view>
+    <view class="weui-cell__ft"></view>
+  </navigator>
 </view>

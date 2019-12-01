@@ -37,8 +37,19 @@ view{
 }
 
 .roomdetail {
+  display: flex;
+  flex-direction: column;
   padding: 30rpx 0 30rpx 150rpx;
   border-bottom: solid 1px black;
+}
+.roomitem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.copyImage{
+  width: 20px;
+  height: 20px;
 }
 
 .top {
@@ -158,6 +169,7 @@ view{
   width: 100%;
   text-align: center;
   border-bottom: 1px solid #ccc;
+  flex: 1;
 }
 
 .td {

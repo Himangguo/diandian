@@ -5,10 +5,10 @@
     </modal>
     <view class="header">
         <view class="signed" bindtap="chooseSigned" style="background:{{buttonColor}};color:{{fontColor}}">已签
-            {{signed}}/{{listNum}}
+            {{signed}}
         </view>
         <view class="nullSign" bindtap="chooseNullSign" style="background:{{buttonColor_1}};color:{{fontColor_1}}">未签
-            {{nullSign}}/{{listNum}}
+            {{nullSign}}
         </view>
 
     </view>

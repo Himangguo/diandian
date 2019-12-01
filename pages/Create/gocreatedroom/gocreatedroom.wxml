@@ -5,7 +5,9 @@
 <button  class='iconfont icongong::before' catchtap='roomfunc'></button>
 <button  class='iconfont icondel::before' catchtap='deleteRoom'></button>
 <view class='roomdetail'>
-<view>房间号: <text class='textfont'>{{roominf.roomnumber}}</text></view>
+<view class="roomitem">房间号: <text class='textfont'>{{roominf.roomnumber}}</text>
+<image class="copyImage" src="/images/copy.png" mode="aspectFit" bindtap="copyRoomNumber"></image>
+</view>
 <view>房间名: <text class='textfont'>{{roominf.rname}}</text></view>
 <view>房间人数: <text class='textfont'>{{roominf.personcount}}</text></view>
 <view>考勤距离: <text class='textfont'>{{roominf.distance}}</text></view>

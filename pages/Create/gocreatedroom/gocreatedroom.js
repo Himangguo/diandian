@@ -9,7 +9,6 @@ Page({
     roomdetailid: null,
     attendtime: null,
     presenttime: null,
-    roomid: null
   },
   //返回上一个页面刷新
   backRefreash: function() {
@@ -190,6 +189,25 @@ Page({
           title:'网络异常',
           image:'/pages/warning.png'
         })
+      },
+      complete(res) {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      }
+    })
+  },
+  /**
+   * 复制房间号
+   */
+  copyRoomNumber:function(){
+    wx.setClipboardData({
+      data: this.data.roominf.roomnumber,
+      success (res) {
+        wx.getClipboardData({
+          success (res) {
+            console.log(res.data) // data
+          }
+        })
       }
     })
   },
@@ -201,6 +219,14 @@ Page({
     var roomid = JSON.parse(options.roomid);
     // 根据roomid获取房间信息
     this.getRoominf(roomid)
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.getRoominf(this.data.roominf.id) //重新加载资源
+
   }
 
 

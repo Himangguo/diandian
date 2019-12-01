@@ -1,1 +1,7 @@
-/* pages/Create/getStudentStatistics/getStudentStatistics.wxss */
+.detailImage{
+    width: 20px;
+    height: 20px;
+}
+.remark{
+    flex: 2;
+}

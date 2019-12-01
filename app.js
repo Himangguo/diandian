@@ -81,21 +81,7 @@ App({
     }
   },
   onLaunch: function() {
-    var that = this;
-    // 登录
-    wx.login({
-      success: res => {
-        var time2 = setInterval(function() {
-          if (that.globalData.userInfo) { //如果已经获得了userInfo
-            console.log(that.globalData.userInfo);
-            that.globalData.ifNowAuth = true;
-            that.loginCon(res); //将登录信息发送到后台获取openid
-            clearInterval(time2); //清除定时器
-          }
-        }, 0)
-      }
-
-    })
+    let that = this;
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -115,6 +101,21 @@ App({
         }
       }
     })
+    // 登录
+    wx.login({
+      success: res => {
+        var time2 = setInterval(function() {
+          if (that.globalData.userInfo) { //如果已经获得了userInfo
+            console.log(that.globalData.userInfo);
+            that.globalData.ifNowAuth = true;
+            that.loginCon(res); //将登录信息发送到后台获取openid
+            clearInterval(time2); //清除定时器
+          }
+        }, 0)
+      }
+
+    })
+
     // 监听网络连接情况
       wx.onNetworkStatusChange(function (res) {
       if (res.networkType == 'none') {
@@ -257,6 +258,6 @@ App({
     applyCome:false, // 标记申请消息
     applyCount:0,
     nonetwork: false, // 网络情况
-    url: '192.168.43.99:8080/diandian'
+    url: '127.0.0.1:8080/diandian'
   }
 })

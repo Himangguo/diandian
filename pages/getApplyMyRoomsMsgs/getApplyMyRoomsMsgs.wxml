@@ -43,6 +43,10 @@
         <swiper-item>
             <!-- 已审批 -->
             <view class="checkContain">
+                <view class="navigationBar">
+                    <view class="navItem">备注/申请时间</view>
+                    <view class="navItem">房间名/房间号</view>
+                </view>
                 <view class="checkBox" wx:for="{{applyedList}}" wx:key="{{item.id}}">
                     <view class="item head">
                         <image src="{{applyedImageUrl}}" mode="aspectFit" class="headImage"></image>

@@ -11,7 +11,7 @@ Page({
         itemStatus: null,
         hiddenmodalput: true,
         hiddens: true,
-        lateTime: 9999999, // 迟到时间
+        lateTime: 999999, // 迟到时间
         changeButtonview: true,
         roominf: null,
         socketOpen: false,

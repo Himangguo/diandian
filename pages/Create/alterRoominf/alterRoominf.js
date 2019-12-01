@@ -7,7 +7,7 @@ Page({
    */
   data: {
     roominf: null,
-    range: [5, 10, 20, 50, 100],
+    range: [20, 30, 40, 50, 100, 200, 500, 10000, 100000],
     distance: '',
     switch1Checked:0
   },

@@ -19,8 +19,7 @@
 <view wx:else class="ifnothavedata">
     您还没创建过房间哦!
 </view>
-<view wx:if="{{!haveUserInfo && canIUse}}" class="ifhaveUserInfo">
-  <view class="takeCare">使用</view>
-   <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo" >授权并使用小程序</button>
-</view>
+
+<button wx:if="{{!hasUserInfo && canIUse}}" class="ifhaveUserInfo" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >获取头像昵称</button>
+
 </view>

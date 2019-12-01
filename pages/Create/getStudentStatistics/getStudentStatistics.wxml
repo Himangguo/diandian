@@ -2,19 +2,21 @@
 <view class="contain">
     <view class="table">
         <view class='tr'>
-            <view class='th'>名称</view>
+            <view class='th remark'>备注</view>
             <view class='th'>到达</view>
             <view class='th'>请假</view>
             <view class='th'>迟到</view>
             <view class='th'>旷课</view>
+            <view class='th'>详情</view>
         </view>
         <block wx:for="{{userStatistics}}" wx:key="{{item.id}}">
             <view class="tr">
-                <view class='td'>{{item.lists.remarkname}}</view>
+                <view class='td remark'>{{item.lists.remarkname}}</view>
                 <view class='td'>{{item.arrive}}</view>
                 <view class='td'>{{item.leaved}}</view>
                 <view class='td'>{{item.late}}</view>
                 <view class='td'>{{item.absentee}}</view>
+                <view class="td" bindtap="viewStuDetail" data-userid="{{item.userid}}"><image class="detailImage" mode="aspectFit" src="/images/detail.png"></image></view>
             </view>
         </block>
     </view>
