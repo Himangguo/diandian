@@ -42,10 +42,10 @@ App({
             },
             complete(res){
               console.log("一轮查询结束",res);
-              // 隔10秒查一次申请情况
+              // 隔5秒查一次申请情况
               setTimeout(()=>{
                 that.receiveApply();
-              },10000);
+              },5000);
             }
         })
       } ,
@@ -258,6 +258,6 @@ App({
     applyCome:false, // 标记申请消息
     applyCount:0,
     nonetwork: false, // 网络情况
-    url: '127.0.0.1:8080/diandian'
+    url: '192.168.1.101:8080/diandian'
   }
 })

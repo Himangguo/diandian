@@ -4,7 +4,7 @@
       <view class='th'>序号</view>
       <view class='th'>昵称</view>
       <view class='th'>状态</view>
-      <view class='th'>签到</view>
+      <view class='th time'>签到</view>
     </view>
     <block wx:for="{{personinf}}" wx:key="{{item.id}}">
       <view class="tr">
@@ -15,7 +15,7 @@
         <view class='td' wx:elif="{{item.attendstatus === 3}}">请假</view>
         <view class='td' wx:elif="{{item.attendstatus === 4}}">旷课</view>
         <view class="td" wx:if='{{item.attendstatus == 4}}'>未签到</view>
-        <view class="td" wx:else>{{item.attendtime}}</view>
+        <view class="td time" wx:else>{{item.attendtime}}</view>
       </view>
     </block>
   </view>

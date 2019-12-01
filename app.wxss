@@ -178,7 +178,9 @@ view{
   justify-content: center;
   font-size: 10px;
 }
-
+.time{
+  flex: 2;
+}
 .button_q {
   margin: 5px;
   background-color: #f36838;
