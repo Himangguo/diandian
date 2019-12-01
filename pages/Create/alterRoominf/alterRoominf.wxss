@@ -23,4 +23,8 @@
   margin: 40rpx auto;
   border: 10rpx;
 }
+.inputTitle{
+  width: 25%;
+
+}
 

@@ -170,15 +170,37 @@ Page({
     })
   },
   /**
+   * 根据房间id获取房间信息
+   * @param roomid
+   */
+  getRoominf:function(roomid){
+    let that = this;
+    wx.request({
+      method:'get',
+      url:app.globalData.urlCreated('/room/getRoomById',roomid),
+      success(res) {
+        console.log("success");
+        that.setData({
+          roominf:res.data.data
+        })
+      },
+      fail(res) {
+        console.log("fail",res.data)
+        wx.showToast({
+          title:'网络异常',
+          image:'/pages/warning.png'
+        })
+      }
+    })
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     var that = this;
-    var roominf = JSON.parse(options.roominf);
-    this.setData({
-      roominf: roominf,
-      roomid: roominf.id
-    })
+    var roomid = JSON.parse(options.roomid);
+    // 根据roomid获取房间信息
+    this.getRoominf(roomid)
   }
 
 

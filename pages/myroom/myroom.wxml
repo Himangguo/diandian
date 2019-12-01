@@ -10,7 +10,7 @@
 </view>
 <block wx:if="{{haveData}}">
 <block wx:for="{{roomlist}}" wx:key="{{item.id}}" >
- <view class='room'catchtap="gocreatedroom" data-index="{{index}}">
+ <view class='room'catchtap="gocreatedroom" data-roomid="{{item.id}}">
 <view class='iconfont iconmub:before'><text class='title'>{{item.rname}}</text></view>
 <view  class='textarea'><text  class='textfont'>{{item.note}}</text></view>
 </view>

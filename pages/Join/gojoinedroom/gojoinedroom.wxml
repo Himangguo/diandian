@@ -3,7 +3,7 @@
 <view class='roomabout'>
 <button  class='iconfont icongong' catchtap='roomfunc'></button>
 <button class='iconfont icondel' catchtap='deleteRoom'></button>
-<view class='roomdetail2'>
+<view class='roomdetail'>
 <view>房间号:<text class='textfont'>{{roominf.roomnumber}}</text></view>
 <view>房间名:<text class='textfont'>{{roominf.rname}}</text></view>
 <view>创建者id:<text class='textfont'>{{roominf.userid}}</text></view>

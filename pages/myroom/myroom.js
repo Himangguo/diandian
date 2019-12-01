@@ -33,11 +33,10 @@ Page({
   //用户点击了某房间
   gocreatedroom: function(event) {
     var that = this;
-    var index = event.currentTarget.dataset.index; //获取到用户点击房间的房间的index
-    console.log("index:" + index);
-    var roominf = that.data.roomlist[index]; //点击的房间信息
+    var roomid = event.currentTarget.dataset.roomid; //获取到用户点击房间的房间的id
+    console.log("roomid:" + roomid);
     wx.navigateTo({
-      url: '/pages/Create/gocreatedroom/gocreatedroom?roominf=' + JSON.stringify(roominf)
+      url: '/pages/Create/gocreatedroom/gocreatedroom?roomid=' + roomid
     })
   },
   //用户点击了创建

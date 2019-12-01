@@ -11,7 +11,7 @@ Page({
         itemStatus: null,
         hiddenmodalput: true,
         hiddens: true,
-        lateTime: 1, // 迟到时间
+        lateTime: 9999999, // 迟到时间
         changeButtonview: true,
         roominf: null,
         socketOpen: false,
@@ -116,14 +116,16 @@ Page({
             success: function (res) {
                 //如果点击了确认
                 if (res.confirm) {
-                    //停止发送位置信息
+                    // 停止时间流动
+                    clearInterval(that.data.flowTime)
+                    // 停止发送位置信息
                     clearInterval(sendTime);
                     console.log('停止发送位置信息')
-                    //结束考勤
+                    // 结束考勤
                     let data = {
                         type: 'end'
                     }
-                    //end信息发送到服务端请求结束
+                    // end信息发送到服务端请求结束
                     that.sendSocketMessage(data);
                 }
             }
@@ -492,7 +494,7 @@ Page({
      */
     timeFlow:function(){
         console.log("设置的迟到时间：",this.data.lateTime)
-        setInterval(()=>{
+        this.data.flowTime = setInterval(()=>{
             if (this.data.minute == this.data.lateTime && this.data.second == 0){
               console.log("到达设定迟到时间555555555555555555555555");
                 wx.showModal({

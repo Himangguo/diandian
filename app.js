@@ -175,8 +175,12 @@ App({
        */
       getMS(timestamp){
         let date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-        let h = date.getHours() + ":";
-        let m = date.getMinutes();
+        let h = (date.getHours() < 10
+            ? "0" +(date.getHours())
+            : date.getHours()) + ":";
+        let m = (date.getMinutes() < 10
+            ? "0" +(date.getMinutes())
+            : date.getMinutes());
         console.log(timestamp, h + m );
         return  h + m ;
       },
@@ -253,6 +257,6 @@ App({
     applyCome:false, // 标记申请消息
     applyCount:0,
     nonetwork: false, // 网络情况
-    url: '192.168.1.112:8080/diandian'
+    url: '192.168.43.99:8080/diandian'
   }
 })

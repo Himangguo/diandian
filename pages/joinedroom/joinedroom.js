@@ -74,7 +74,7 @@ Page({
         console.log(res.data)
         if (res.data.code === 1) {
           wx.showToast({
-            title: '加入成功',
+            title: res.data.message,
           })
           //刷新页面
           wx.startPullDownRefresh();
@@ -307,10 +307,7 @@ Page({
             image: '/images/warning.png',
           })
         }else if(res.data.code===0){  //如果数据为空
-          wx.showToast({
-            title: '数据为空',
-            image: '/images/warning.png'
-          })
+          wx.hideLoading();
           that.setData({
             haveData:false
           })

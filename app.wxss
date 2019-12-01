@@ -9,9 +9,6 @@ view{
   width: 100vw;
   background-color: rgb(253, 252, 248);
 }
-.container{
-
-}
 .banner {
   width: 200rpx;
   height: 200rpx;
@@ -29,7 +26,6 @@ view{
   background-color: #f36838;
   width: 150rpx;
   height: 80rpx;
-  top: 0;
   right: 1rpx;
   color: white;
 }

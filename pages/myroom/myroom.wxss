@@ -1,12 +1,15 @@
 /* pages/myroom/myroom.wxss */
 
 .fontmyroom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   position: relative;
   padding: 15rpx;
-  margin: 40rpx auto;
+  margin: 0 auto 40px;
   width: 80vw;
+  height: 50px;
   font-size: 40rpx;
-  color: black;
 }
 
 .ifhaveUserInfo {

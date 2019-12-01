@@ -2,16 +2,16 @@
 <view class='formcenter'>
   <form bindsubmit="formSubmit">
     <view class='inputtype'>
-    课程名:<input type='text'class='infont' value='{{roominf.rname}}' name='rname'></input>
+    <span class="inputTitle">课程名</span><input type='text'class='infont' value='{{roominf.rname}}' name='rname'></input>
     </view>
     <view class='inputtype'>
-    考勤距离:   <picker name="distance" mode="selector" range="{{range}}" bindchange="selectDis"><view class='infont'> {{distance}} 米</view></picker>
+    <span class="inputTitle">考勤距离</span><picker name="distance" mode="selector" range="{{range}}" bindchange="selectDis"><view class='infont'> {{distance}} 米</view></picker>
     </view>
     <view class='inputtype'>
-      加入审核:  <switch checked="{{roominf.checked}}" bindchange="switch1Change"/>
+      <span class="inputTitle">加入审核</span><switch checked="{{roominf.checked}}" bindchange="switch1Change"/>
     </view>
     <view class='inputtype'>
-      简介<textarea value='{{roominf.note}}'class='infont' name="note" />
+      <span class="inputTitle">简介</span><textarea value='{{roominf.note}}'class='infont' name="note" />
     </view>
     <button form-type="submit" class='button1'>提交</button>
   </form>
