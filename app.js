@@ -253,6 +253,6 @@ App({
     applyCome:false, // 标记申请消息
     applyCount:0,
     nonetwork: false, // 网络情况
-    url: '10.23.117.79:8080/diandian'
+    url: '192.168.1.112:8080/diandian'
   }
 })

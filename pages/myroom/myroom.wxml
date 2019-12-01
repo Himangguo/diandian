@@ -5,7 +5,7 @@
 
 <view class='contain'>
 <view class='fontmyroom'>
-<text >我的课程列表:</text>
+<text >我的房间列表:</text>
 <button  class='buttonstyle' catchtap="createattence">创建</button>
 </view>
 <block wx:if="{{haveData}}">
@@ -17,7 +17,7 @@
 </block>
 </block>
 <view wx:else class="ifnothavedata">
-    您还没创建过课程哦!
+    您还没创建过房间哦!
 </view>
 <view wx:if="{{!haveUserInfo && canIUse}}" class="ifhaveUserInfo">
   <view class="takeCare">使用</view>

@@ -11,7 +11,7 @@ Page({
         itemStatus: null,
         hiddenmodalput: true,
         hiddens: true,
-        lateTime: 789456, // 迟到时间
+        lateTime: 1, // 迟到时间
         changeButtonview: true,
         roominf: null,
         socketOpen: false,
@@ -493,7 +493,8 @@ Page({
     timeFlow:function(){
         console.log("设置的迟到时间：",this.data.lateTime)
         setInterval(()=>{
-            if (this.data.minute == this.data.lateTime){
+            if (this.data.minute == this.data.lateTime && this.data.second == 0){
+              console.log("到达设定迟到时间555555555555555555555555");
                 wx.showModal({
                     title:'提醒',
                     content:'已到设置的迟到时间,'+this.data.lateTime+'分钟',

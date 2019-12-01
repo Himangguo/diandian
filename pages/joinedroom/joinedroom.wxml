@@ -6,7 +6,7 @@
         <view class="weui-search-bar__form">
           <view class="weui-search-bar__box">
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="number" class="weui-search-bar__input" placeholder="课程ID" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+            <input type="number" class="weui-search-bar__input" placeholder="请输入房间号" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
             <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
               <icon type="clear" size="14"></icon>
             </view>
@@ -64,7 +64,7 @@
 </view>
 <view class='changenickname' hidden='{{hiddens}}'>
   <form bindsubmit="formSubmit">
-    <input class='input1' type='text' placeholder='起个霸气的昵称吧' name="nickname" focus="{{focus}}" value="{{value}}" />
+    <input class='input1' type='text' placeholder='填写备注昵称' name="nickname" focus="{{focus}}" value="{{value}}" />
     <button form-type="submit" class='button_q'>确定</button>
     <button catchtap='cancel' class='button_q'>取消</button>
   </form>

@@ -43,8 +43,9 @@
 
     </scroll-view>
     <view class="footer">
-        <view  wx:if="{{minute == 0}}" class="second">{{second}}</view>
-        <view  wx:else><span class="minute">{{minute}}</span><span>:</span><span class="second">{{second}}</span></view>
+        <image class="clock"src="/images/clock.png" mode="aspectFit"></image>
+        <view  wx:if="{{minute == 0}}" class="second">{{second}}s</view>
+        <view  wx:else><span class="minute">{{minute}}</span><span class="colon">:</span><span class="second">{{second}}</span></view>
         <view class="over" bindtap="overing">结束</view>
     </view>
 

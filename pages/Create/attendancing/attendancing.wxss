@@ -80,16 +80,24 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position:fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   background: #f36838;
   text-align: center;
+  border-top-left-radius: 50vw;
+  border-top-right-radius: 50vw;
   color: white;
-  height: 25px;
+  height: 40px;
+  width:100%;
+  font-size: 30px;
 }
-.over,.minute,.second{
+.clock{
+    height: 40px;
+    width: 40px;
+}
+.over,.minute,.second,.clock,.colon{
   margin: 5px;
 }
 .manImage,.womanImage,.noneImage{

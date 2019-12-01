@@ -7,7 +7,7 @@ Component({
     "list": [
       {
         "pagePath": "/pages/myroom/myroom",
-        "text": "创建课程",
+        "text": "创建房间",
         "iconPath": "/images/home.png",
         "selectedIconPath": "/images/home1.png"
       },
@@ -19,7 +19,7 @@ Component({
       },
       {
         "pagePath": "/pages/joinedroom/joinedroom",
-        "text": "加入课程",
+        "text": "加入房间",
         "iconPath": "/images/icon2.png",
         "selectedIconPath": "/images/icon21.png"
       },
