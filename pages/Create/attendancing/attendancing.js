@@ -11,7 +11,7 @@ Page({
         itemStatus: null,
         hiddenmodalput: true,
         hiddens: true,
-        lateTime: 999999, // 迟到时间
+        lateTime: 9999999, // 迟到时间
         changeButtonview: true,
         roominf: null,
         socketOpen: false,
@@ -438,6 +438,18 @@ Page({
             this.setData({
                 lateTime: e.detail.value
             })
+        }else{
+            wx.showModal({
+                title:'非法输入',
+                content:'迟到时间应为纯数字',
+                showCancel:false,
+                confirmText:'知道了',
+                success(res) {
+                    if (res.confirm){
+                        console.log('用户点击了确定')
+                    }
+                }
+            })
         }
 
     },
@@ -450,8 +462,6 @@ Page({
         let lateTime = this.data.lateTime;
         console.log("设置的迟到时间为：", lateTime)
         if (typeof lateTime === "number") {
-            // 进行socket连接
-            this.socketConnection();
             // 隐藏model
             this.setData({
                 hiddenmodalput: true
@@ -460,14 +470,21 @@ Page({
             let data = {
                 type: 'start',
                 data: this.data.roominf.id,
-                lateTime: this.data.lateTime
+                lateTime: lateTime
             }
             // socket连接
             this.socketConnection(data);
         } else {
-            wx.showToast({
-                title: "时间不合法",
-                image: "/images/warning.png"
+            wx.showModal({
+                title:'非法输入',
+                content:'迟到时间应为纯数字',
+                showCancel:false,
+                confirmText:'知道了',
+                success(res) {
+                    if (res.confirm){
+                        console.log('用户点击了确定')
+                    }
+                }
             })
         }
 

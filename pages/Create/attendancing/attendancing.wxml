@@ -1,7 +1,7 @@
 <view class='contain'>
     <modal hidden="{{hiddenmodalput}}" title="请输入迟到时间" confirm-text="提交" cancel-text="取消" bindcancel="cancel"
            bindconfirm="confirm">
-        <input type='number' placeholder="请输入整数，单位为分钟" value="{{lateTime}}" bindinput='formLateTime' auto-focus/>
+        <input type='number' placeholder="请输入整数，单位为分钟"  bindinput='formLateTime' auto-focus/>
     </modal>
     <view class="header">
         <view class="signed" bindtap="chooseSigned" style="background:{{buttonColor}};color:{{fontColor}}">已签
