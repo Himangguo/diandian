@@ -9,9 +9,9 @@
     <block wx:if="{{haveData}}" wx:for="{{userdetails}}" wx:key="{{item.id}}">
       <view class="tr">
         <view class='td'>{{index+1}}</view>
-        <view class='td'>{{item.roomdetail.begintime}}</view>
-        <view class='td' wx:if="{{item.attendstatus == 4}}">未签到</view>
-        <view class='td' wx:else>{{item.attendtime}}</view>
+        <view class='td time'>{{item.roomdetail.begintime}}</view>
+        <view class='td time' wx:if="{{item.attendstatus == 4}}">未签到</view>
+        <view class='td time' wx:else>{{item.attendtime}}</view>
         <view class='td' wx:if="{{item.attendstatus == 1}}">到达</view>
         <view class='td' wx:elif="{{item.attendstatus == 2}}">迟到</view>
         <view class='td' wx:elif="{{item.attendstatus == 3}}">请假</view>
