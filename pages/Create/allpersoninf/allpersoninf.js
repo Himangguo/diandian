@@ -17,9 +17,6 @@ Page({
       success: function(res) {
         console.log('单次考勤明细：',res.data);
         if(res.data.code===1){
-          for (let item of res.data.data){
-            item.attendtime = app.globalData.timeFormat.getMS(item.attendtime);
-          }
           that.setData({
             personinf: res.data.data
           })
