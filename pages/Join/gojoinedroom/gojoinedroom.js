@@ -89,6 +89,21 @@ Page({
       roominf: room
     })
   },
+    /**
+   * 复制房间号
+   */
+  copyRoomNumber:function(){
+    wx.setClipboardData({
+      data: this.data.roominf.roomnumber,
+      success (res) {
+        wx.getClipboardData({
+          success (res) {
+            console.log(res.data) // data
+          }
+        })
+      }
+    })
+  },
   //签到
   tosign: function () {
     let that = this;
