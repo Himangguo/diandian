@@ -649,10 +649,7 @@ Page({
                                 })
                             }
                         });
-                        //返回到房间信息页面
-                        wx.reLaunch({
-                            url: '/pages/myroom/myroom'
-                        })
+                      
                     } else {
                         console.log('考勤结束失败')
                     }
@@ -665,8 +662,12 @@ Page({
                     socketOpen: false
                 })
                 console.log('WebSocket 已关闭！');
+                  //返回到房间信息页面
+                  wx.reLaunch({
+                    url: '/pages/myroom/myroom'
+                })
                 // 如果网络连接断开
-                if(app.globalData.nonetwork){
+             /*    if(app.globalData.nonetwork){
                     wx.showModal({
                         title:'断开',
                         content:'连接失败，请检查网络连接后重连',
@@ -680,7 +681,7 @@ Page({
                         }
 
                     })
-                }
+                } */
 
             })
             // 监听WebSocket错误
