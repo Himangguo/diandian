@@ -190,6 +190,7 @@ Page({
   },
   //检查位置授权情况
   tosign: function(event) {
+    let that = this;
     var roomid = event.currentTarget.dataset.roomid;
     var latitude = null;
     var longitude = null;
