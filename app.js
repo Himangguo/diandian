@@ -54,7 +54,7 @@ App({
     // 发起网络请求
     if (res.code) {
       wx.request({
-        url: that.globalData.urlCreated("/index/login", that.globalData.userInfo.nickName, res.code),
+        url: that.globalData.urlCreated("/index/login", that.globalData.userInfo.nickName, that.globalData.userInfo.gender, res.code),
         method: 'get',
         success: function(res) {
           console.log('登录->后端返回的数据' + JSON.stringify(res.data));
@@ -162,7 +162,9 @@ App({
     })
   },
 
-
+/**
+ * 全局变量
+ */
   globalData: {
     //普通http请求url制造器
     urlCreated(params, ...query) {
@@ -269,6 +271,6 @@ App({
     applyCome:false, // 标记申请消息
     applyCount:0,
     nonetwork: false, // 网络情况
-    url: '192.168.43.34:8080/diandian'
+    url: '127.0.0.1:8080/diandian'
   }
 })
