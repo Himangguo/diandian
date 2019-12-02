@@ -122,12 +122,23 @@ App({
         console.log("网络断开连接")
         that.globalData.nonetwork = true;
         wx.showLoading({
-          title:"网络重连中"
+          title:"网络连接中"
         })
       } else {
         console.log("网络启动连接")
-        that.globalData.nonetwork = false;
         wx.hideLoading();
+        wx.showModal({
+          title:'连接成功',
+          content:'重连成功，请点击【好的】并刷新页面',
+          showCancel:false,
+          confirmText:'好的',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
+        })
+        that.globalData.nonetwork = false;
       }
     })
   },
@@ -258,6 +269,6 @@ App({
     applyCome:false, // 标记申请消息
     applyCount:0,
     nonetwork: false, // 网络情况
-    url: '127.0.0.1:8080/diandian'
+    url: '192.168.43.34:8080/diandian'
   }
 })

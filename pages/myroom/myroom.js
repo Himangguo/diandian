@@ -67,13 +67,11 @@ Page({
             title: '加载成功',
           })
         } else if (res.data.code === 0) { // 如果数据为空
+          wx.hideLoading();
           that.setData({
             haveData: false
           })
-          wx.showToast({
-            title:'数据为空',
-            image: '/images/warning.png'
-          })
+          
         } else {
           wx.showToast({
             title: '加载失败',
@@ -153,6 +151,9 @@ Page({
           messageCount:newVal
         })
       })
+      if (app.globalData.ifNowAuth){
+        this.fetchData();
+      }
   }
   },
   getUserInfo: function(e) {

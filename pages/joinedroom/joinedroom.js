@@ -293,6 +293,9 @@ Page({
   },
   fetchData: function() {
     let that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: app.globalData.urlCreated('/user/getJoinRoomsByUserId', app.globalData.userid),
       //给后端传userid
@@ -330,9 +333,7 @@ Page({
         wx.stopPullDownRefresh();
       },
     })
-    wx.showLoading({
-      title: '加载中',
-    })
+   
   },
 
 

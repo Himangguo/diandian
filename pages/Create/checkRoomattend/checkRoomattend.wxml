@@ -4,7 +4,7 @@
 <view wx:if="{{haveData}}">
 <block wx:for="{{roomdetailList}}" wx:key="{{item.id}}">
 <view class='PersonOrRoomdetail' catchtap='checkPersonRecord' data-roomdetailid="{{item.id}}">
-<view class='iconfont iconcalendar1:before'>序号：<text class='textfont'>{{item.id}}</text></view>
+<view class='iconfont iconcalendar1:before'>序号：<text class='textfont'>{{index+1}}</text></view>
 <view class='iconfont iconcalendar:before'>开始：<text class='textfont'>{{item.begintime}}</text></view>
 <view class='iconfont iconnotebook:before'>结束：<text class='textfont'>{{item.endtime?item.endtime:'无'}}</text></view>
 <view class='iconfont iconcalendar:before'>人数：<text class='textfont'>{{item.number}}</text></view>
