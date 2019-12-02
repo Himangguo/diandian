@@ -108,9 +108,88 @@ Page({
 
     }).exec();
   },
-  //签到
+  /**
+   * 签到
+   * @param roomid
+   */
+  signing: function(roomid){
+    wx.showLoading({
+      title: '签到中',
+    })
+    wx.getLocation({
+      type: 'gcj02',
+     // isHighAccuracy: "true",
+     // highAccuracyExpireTime: 4000,
+      success(res) {
+        console.log('获取位置成功');
+        latitude = res.latitude
+        longitude = res.longitude
+        wx.request({
+          method: 'POST',
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          url: app.globalData.urlCreated('/attendance/single/student'),
+          data: {
+            roomId: roomid,
+            studentId: app.globalData.userid,
+            latitude: latitude,
+            longitude: longitude
+          },
+
+          success: function (res) {
+            //如果在考勤范围内
+            if (res.data.status === 1) {
+              wx.showToast({
+                title: '签到成功',
+                duration: 2000,
+              })
+            } else if (res.data.status === 2) {
+              wx.showToast({
+                title: '签到过了',
+                duration: 2000,
+              })
+            } else if (res.data.status === 0) {
+              console.log('签到失败：', res.data)
+              wx.showToast({
+                title: res.data.data,  // 显示失败信息
+                image: '/images/warning.png',
+                duration: 2000
+              })
+            }
+          },
+          fail: function () {
+            wx.showToast({
+              title: '服务器异常',
+              image: '/images/warning.png'
+            })
+          }
+        })
+        wx.showLoading({
+          title: '签到中'
+        })
+      },
+      // 位置获取失败
+      fail(err) {
+        console.log("获取位置失败：", err)
+        // 如果是GPS信号不好或者没开GPS
+        if (err.errCode == 2){
+          wx.showToast({
+            title: "检查GPS状态",
+            image: "/images/warning.png"
+          })
+        }else{
+          wx.showToast({
+            title: "获取位置失败",
+            image: "/images/warning.png"
+          })
+        }
+
+      }
+    })
+  },
+  //检查位置授权情况
   tosign: function(event) {
-    var teacherid = event.currentTarget.dataset.createdid;
     var roomid = event.currentTarget.dataset.roomid;
     var latitude = null;
     var longitude = null;
@@ -125,6 +204,7 @@ Page({
             success() {
               // 用户已经同意小程序获取位置信息
               console.log("用户已经同意小程序获取位置信息");
+              that.signing(roomid);
             },
             fail: function(){
               wx.showModal({
@@ -141,82 +221,7 @@ Page({
           })
           // 如果已经授权
         } else {
-
-          wx.showLoading({
-            title: '签到中',
-          })
-          wx.getLocation({
-            type: 'gcj02',
-           // isHighAccuracy: "true",
-           // highAccuracyExpireTime: 4000,
-            success(res) {
-              console.log('获取位置成功');
-              latitude = res.latitude
-              longitude = res.longitude
-              wx.request({
-                method: 'POST',
-                header: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                },
-                url: app.globalData.urlCreated('/attendance/single/student'),
-                data: {
-                  roomId: roomid,
-                  studentId: app.globalData.userid,
-                  latitude: latitude,
-                  longitude: longitude
-                },
-
-                success: function (res) {
-                  //如果在考勤范围内
-                  if (res.data.status === 1) {
-                    wx.showToast({
-                      title: '签到成功',
-                      duration: 2000,
-                    })
-                  } else if (res.data.status === 2) {
-                    wx.showToast({
-                      title: '签到过了',
-                      duration: 2000,
-                    })
-                  } else if (res.data.status === 0) {
-                    console.log('签到失败：', res.data)
-                    wx.showToast({
-                      title: res.data.data,  // 显示失败信息
-                      image: '/images/warning.png',
-                      duration: 2000
-                    })
-                  }
-                },
-                fail: function () {
-                  wx.showToast({
-                    title: '服务器异常',
-                    image: '/images/warning.png'
-                  })
-                }
-              })
-              wx.showLoading({
-                title: '签到中'
-              })
-            },
-            // 位置获取失败
-            fail(err) {
-              console.log("获取位置失败：", err)
-              // 如果是GPS信号不好或者没开GPS
-              if (err.errCode == 2){
-                wx.showToast({
-                  title: "检查GPS状态",
-                  image: "/images/warning.png"
-                })
-              }else{
-                wx.showToast({
-                  title: "获取位置失败",
-                  image: "/images/warning.png"
-                })
-              }
-
-            }
-          })
-
+          that.signing(roomid);
         }
 
 
