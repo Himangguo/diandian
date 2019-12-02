@@ -12,6 +12,6 @@
 </block>
 </view>
 <view wx:else class="ifnothavedata">
-    占无考勤数据哦！
+    暂无考勤数据哦！
 </view>
 </view>
