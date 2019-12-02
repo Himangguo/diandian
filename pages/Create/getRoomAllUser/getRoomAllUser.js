@@ -30,6 +30,9 @@ Page({
           })
         }else if(res.data.code===0){
           console.log("数据为空");
+          that.setData({
+            allPerson:[]
+          })
           wx.showToast({
             title:'无数据'
           })
