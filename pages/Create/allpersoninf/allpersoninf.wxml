@@ -14,7 +14,7 @@
         <view class='td' wx:elif="{{item.attendstatus === 2}}">迟到</view>
         <view class='td' wx:elif="{{item.attendstatus === 3}}">请假</view>
         <view class='td' wx:elif="{{item.attendstatus === 4}}">旷课</view>
-        <view class="td" wx:if='{{item.attendstatus == 4}}'>未签到</view>
+        <view class="td time" wx:if='{{item.attendstatus == 4}}'>未签到</view>
         <view class="td time" wx:else>{{item.attendtime}}</view>
       </view>
     </block>
