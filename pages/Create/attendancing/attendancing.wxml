@@ -18,7 +18,7 @@
                 <view class="stuinfLeft">
                     <image src="/images/manImage.png" wx:if="{{item.sex == 1}}" mode="aspectFit"
                            class="manImage"></image>
-                    <image src="/images/womanImage.png" wx:elif="{{item.sex == 2}}" mode="aspectFit"
+                    <image src="/images/womanImage.png" wx:elif="{{item.sex == 0}}" mode="aspectFit"
                            class="womanImage"></image>
                     <image src="/images/noneImage.png" wx:else mode="aspectFit"
                            class="noneImage"></image>
