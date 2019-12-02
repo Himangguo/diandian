@@ -54,7 +54,7 @@ App({
     // 发起网络请求
     if (res.code) {
       wx.request({
-        url: that.globalData.urlCreated("/index/login", that.globalData.userInfo.nickName, that.globalData.userInfo.gender, res.code),
+        url: that.globalData.urlCreated("/index/login", that.globalData.userInfo.nickName, res.code, that.globalData.userInfo.gender),
         method: 'get',
         success: function(res) {
           console.log('登录->后端返回的数据' + JSON.stringify(res.data));
