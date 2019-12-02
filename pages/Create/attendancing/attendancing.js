@@ -1,6 +1,7 @@
 // pages/Create/attendancing/attendancing.js
 const app = getApp();
 let sendTime = null;
+let flowTime = null;
 Page({
 
     /**
@@ -36,7 +37,6 @@ Page({
         nullSignStu: [],
         minute:0,
         second:0,
-        flowTime:null,
         hideModal: true, //模态框的状态  true-隐藏  false-显示
         animationData: {},
         items: [
@@ -391,6 +391,10 @@ Page({
 
     onLoad: function (options) {
         let that = this;
+        // 保持手机高亮
+        wx.setKeepScreenOn({
+            keepScreenOn: true
+          })
         console.log("房间inf:", options.roominf);
         this.setData({
             roominf: JSON.parse(options.roominf)
@@ -501,7 +505,7 @@ Page({
      */
     timeFlow:function(){
         console.log("设置的迟到时间：",this.data.lateTime)
-        this.data.flowTime = setInterval(()=>{
+        flowTime = setInterval(()=>{
             if (this.data.minute == this.data.lateTime && this.data.second == 0){
               console.log("到达设定迟到时间555555555555555555555555");
                 wx.showModal({
@@ -757,7 +761,7 @@ Page({
         //前台开启定位
         wx.getLocation({
             type: 'gcj02',
-            isHighAccuracy: "true",
+            // isHighAccuracy: "true",
             success(res) {
                 const latitude = res.latitude
                 const longitude = res.longitude
@@ -782,18 +786,13 @@ Page({
      */
     onHide: function () {
         var that = this;
-        //监听位置的改变
-        /*   wx.onLocationChange((res) => {
-             var latitude = res.latitude;  //纬度
-             var longitude = res.longitude;  //经度
-             //发送到服务端的老师位置数据
-             var locationData = {
-               type: 'location',
-               latitude: latitude,
-               longitude: longitude
-             }
-             //向服务端发送位置信息
-             that.sendSocketMessage(locationData)
-           })*/
+        console.log("页面隐藏事件触发！！");
+      /*   // 清除计数器重新计时
+        clearInterval(sendTime)
+        clearInterval(flowTime)
+        this.sendLocation();
+        this.timeFlow();
+
+            */
     },
 })

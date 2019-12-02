@@ -7,7 +7,8 @@ Page({
    */
   data: {
     allPerson: [],
-    roomid:''
+    roomid:'',
+    ifCreater:false,
   },
   /**
    * 获取所有房间人员信息
@@ -108,8 +109,11 @@ Page({
   onLoad: function(options) {
     //获取roomid
     var roomid = options.roomid;
+    var ifCreater = options.ifCreater||false;
+    console.log(roomid,ifCreater);
     this.setData({
-      roomid:roomid
+      roomid:roomid,
+      ifCreater:ifCreater
     })
     this.getAllpersoninf(roomid);
 

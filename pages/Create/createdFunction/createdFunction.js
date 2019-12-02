@@ -35,7 +35,7 @@ Page({
     })
     this.setData({
       goUrl: "/pages/Create/checkRoomattend/checkRoomattend?roomid=" + that.data.roominf.id,
-      lookallperson: "/pages/Create/getRoomAllUser/getRoomAllUser?roomid=" + that.data.roominf.id,
+      lookallperson: "/pages/Create/getRoomAllUser/getRoomAllUser?roomid=" + that.data.roominf.id+"&ifCreater=true",
       getStudentStatistics: "/pages/Create/getStudentStatistics/getStudentStatistics?roomid=" + that.data.roominf.id
     })
   },

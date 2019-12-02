@@ -4,14 +4,14 @@
     <view class='th'>序号</view>
     <view class='th'>昵称</view>
     <view class='th'>备注</view>
-    <view class="th">删除</view>
+    <view class="th" wx:if="{{ifCreater}}">删除</view>
     </view>
     <block wx:for="{{allPerson}}" wx:key="{{item.id}}">
       <view class="tr">
         <view class='td'>{{index+1}}</view>
         <view class="td">{{item.nickname}}</view>
         <view class='td'>{{item.lists.remarkname}}</view>
-        <view class="td" bindtap="viewKickOut" data-userid="{{item.id}}" data-remarkname="{{item.lists.remarkname}}"><image class="kickOutImage" mode="aspectFit" src="/images/kickout.png"></image></view>
+        <view class="td" wx:if="{{ifCreater}}" bindtap="viewKickOut" data-userid="{{item.id}}" data-remarkname="{{item.lists.remarkname}}"><image class="kickOutImage" mode="aspectFit" src="/images/kickout.png"></image></view>
       </view>
     </block>
   </view>
