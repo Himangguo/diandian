@@ -11,7 +11,8 @@ Page({
         itemStatus: null,
         hiddenmodalput: true,
         hiddens: true,
-        lateTime: 9999999, // 迟到时间
+        lateTime: '999999', // 迟到时间
+        ifInput:false,
         changeButtonview: true,
         roominf: null,
         socketOpen: false,
@@ -433,25 +434,11 @@ Page({
      *
      */
     formLateTime: function (e) {
-        console.log("改变lateTime:", e.detail.value)
-        if (typeof e.detail.value === "number") {
             this.setData({
-                lateTime: e.detail.value
+                lateTime: e.detail.value,
+                ifInput:true
             })
-        }else{
-            wx.showModal({
-                title:'非法输入',
-                content:'迟到时间应为纯数字',
-                showCancel:false,
-                confirmText:'知道了',
-                success(res) {
-                    if (res.confirm){
-                        console.log('用户点击了确定')
-                    }
-                }
-            })
-        }
-
+            console.log('lateTime改为:',this.data.lateTime)
     },
     /**
      * model确认事件
@@ -459,14 +446,19 @@ Page({
      */
     confirm: function () {
         // 获取迟到时间
-        let lateTime = this.data.lateTime;
-        console.log("设置的迟到时间为：", lateTime)
-        if (typeof lateTime === "number") {
+        let lateTime = this.data.lateTime
+        // 检测是否输入过
+        let ifInput = this.data.ifInput;
+        // 正整数正则匹配模板
+        let parten = /^[1,9]\d*$/;
+        // 如果输入过且是正整数
+        if (ifInput && parten.test(lateTime)) {
+            console.log("设置的迟到时间为：", lateTime)
             // 隐藏model
             this.setData({
                 hiddenmodalput: true
             })
-            //给服务端发送考勤初始数据
+            // 给服务端发送考勤初始数据
             let data = {
                 type: 'start',
                 data: this.data.roominf.id,
@@ -474,20 +466,19 @@ Page({
             }
             // socket连接
             this.socketConnection(data);
-        } else {
+        }else{ // 未输入过，或输入不合法
             wx.showModal({
-                title:'非法输入',
-                content:'迟到时间应为纯数字',
+                title:'输入不合法',
+                content:'迟到时间必须为正整数',
                 showCancel:false,
                 confirmText:'知道了',
                 success(res) {
                     if (res.confirm){
-                        console.log('用户点击了确定')
+                        console.log('用户点击了确认');
                     }
                 }
             })
         }
-
     },
     /**
      * model取消事件
@@ -500,8 +491,7 @@ Page({
         //给服务端发送考勤初始数据
         let data = {
             type: 'start',
-            data: this.data.roominf.id,
-            lateTime: this.data.lateTime
+            data: this.data.roominf.id
         }
         // socket连接
         this.socketConnection(data);
