@@ -118,7 +118,7 @@ Page({
                 //如果点击了确认
                 if (res.confirm) {
                     // 停止时间流动
-                    clearInterval(that.data.flowTime)
+                    clearInterval(flowTime)
                     // 停止发送位置信息
                     clearInterval(sendTime);
                     console.log('停止发送位置信息')
