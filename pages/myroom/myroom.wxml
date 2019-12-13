@@ -20,6 +20,6 @@
     您还没创建过房间哦!
 </view>
 
-<button wx:if="{{!hasUserInfo && canIUse}}" class="ifhaveUserInfo" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >获取头像昵称</button>
+<button wx:if="{{!hasUserInfo && canIUse}}" class="ifhaveUserInfo" open-type="getUserInfo" bindgetuserinfo="getUserInfo" >授权个人信息</button>
 
 </view>

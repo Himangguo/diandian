@@ -2,6 +2,7 @@
 const app = getApp();
 let sendTime = null;
 let flowTime = null;
+let ifconfirm = false;
 Page({
 
     /**
@@ -449,12 +450,14 @@ Page({
      *
      */
     confirm: function () {
+        // 点击了确认
+        this.ifconfirm = true;
         // 获取迟到时间
         let lateTime = this.data.lateTime
         // 检测是否输入过
         let ifInput = this.data.ifInput;
         // 正整数正则匹配模板
-        let parten = /^[1,9]\d*$/;
+        let parten = /^[1-9]\d*$/;
         // 如果输入过且是正整数
         if (ifInput && parten.test(lateTime)) {
             console.log("设置的迟到时间为：", lateTime)
@@ -506,7 +509,8 @@ Page({
     timeFlow:function(){
         console.log("设置的迟到时间：",this.data.lateTime)
         flowTime = setInterval(()=>{
-            if (this.data.minute == this.data.lateTime && this.data.second == 0){
+            // 如果用户填写了迟到时间，并且当前时间流到设定的迟到时间
+            if (this.ifconfirm && this.data.minute == this.data.lateTime && this.data.second == 0){
               console.log("到达设定迟到时间555555555555555555555555");
                 wx.showModal({
                     title:'提醒',

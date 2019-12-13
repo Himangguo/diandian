@@ -41,9 +41,23 @@ Page({
   },
   //用户点击了创建
   createattence: function() {
-    wx.navigateTo({
-      url: '/pages/Create/createattence/createattence',
-    })
+    if (!app.globalData.userInfo) {
+      wx.showModal({
+        title: '用户未授权',
+        content: '如需正常使用小程序，请按确定并且在【创建课程】页面中点击授权',
+        showCancel: false,
+        success: function (res) {
+          console.log('用户点击了确定');
+          return;
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/Create/createattence/createattence',
+      })
+    }
+
+   
   },
   /**
    * 生命周期函数--监听页面加载
