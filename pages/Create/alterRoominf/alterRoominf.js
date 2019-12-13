@@ -104,7 +104,7 @@ Page({
         title: '',
       })
       //如果未输入课程名
-    } else if (name == '') {
+    } else if (rname == '') {
       wx.showToast({
         title: '课程名不能为空',
         image: '/images/help.png'
