@@ -492,6 +492,8 @@ Page({
      *
      */
     cancel: function () {
+        // 点击了取消
+        this.ifconfirm = false;
         this.setData({
             hiddenmodalput: true
         });
